@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget LED Ruban</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .widget {
+            width: 100%;
+            max-width: 350px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .circles-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .circle-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .circle:hover {
+            transform: scale(1.1);
+        }
+
+        .power-button {
+            width: 50px;
+            height: 110px;
+            background-color: #444;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .power-button:hover {
+            background-color: #555;
+        }
+
+        #brightness {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .widget {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="widget">
+        <div class="main-container">
+            <div class="circles-container">
+                <div class="circle-row">
+                    <div class="circle" style="background-color: #FF0000;"></div>
+                    <div class="circle" style="background-color: #00FF00;"></div>
+                    <div class="circle" style="background-color: #0000FF;"></div>
+                    <div class="circle" style="background-color: #FFFF00;"></div>
+                    <div class="circle" style="background-color: #00FFFF;"></div>
+                </div>
+                <div class="circle-row">
+                    <div class="circle" style="background-color: #FF00FF;"></div>
+                    <div class="circle" style="background-color: #FFA500;"></div>
+                    <div class="circle" style="background-color: #800080;"></div>
+                    <div class="circle" style="background-color: #008000;"></div>
+                    <div class="circle" style="background-color: #FFC0CB;"></div>
+                </div>
+                <div class="circle-row">
+                    <div class="circle" style="background-color: #FFFFFF;"></div>
+                    <div class="circle" style="background-color: #FFD700;"></div>
+                    <div class="circle" style="background-color: #40E0D0;"></div>
+                    <div class="circle" style="background-color: #FF69B4;"></div>
+                    <div class="circle" style="background-color: #1E90FF;"></div>
+                </div>
+            </div>
+            <button class="power-button"><img src="../../assets/images/power.png" alt=""></button>
+        </div>
+        
+        <input type="range" id="brightness" min="0" max="100" value="50">
+        
+        <div class="button-row">
+            <button class="btn">Mode 1</button>
+            <button class="btn">Mode 2</button>
+        </div>
+        
+        <button class="btn full-width">Appliquer</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const brightnessSlider = document.getElementById('brightness');
+            const circles = document.querySelectorAll('.circle');
+            const powerButton = document.querySelector('.power-button');
+            let isPowerOn = true;
+
+            brightnessSlider.addEventListener('input', function() {
+                const brightness = this.value / 100;
+                circles.forEach(circle => {
+                    circle.style.opacity = brightness;
+                });
+            });
+
+            powerButton.addEventListener('click', function() {
+                isPowerOn = !isPowerOn;
+                if (isPowerOn) {
+                    circles.forEach(circle => circle.style.opacity = brightnessSlider.value / 100);
+                    this.style.backgroundColor = '#444';
+                } else {
+                    circles.forEach(circle => circle.style.opacity = 0);
+                    this.style.backgroundColor = '#ff0000';
+                }
+            });
+
+            circles.forEach(circle => {
+                circle.addEventListener('click', function() {
+                    const color = this.style.backgroundColor;
+                    console.log('Couleur sélectionnée:', color);
+                    // Ici, vous pouvez ajouter la logique pour appliquer la couleur au ruban LED
+                });
+            });
+        });
+    </script>
+</body>
+</html>
