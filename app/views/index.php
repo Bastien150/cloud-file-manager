@@ -41,7 +41,7 @@
             <div class="data-scrollbar" data-scroll="1">
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
-                        <li class=" ">
+                        <li class="active">
                             <a href="" class="">
                                 <i class="las la-home iq-arrow-left"></i><span>Dashboard</span>
                             </a>
@@ -62,7 +62,7 @@
                             <ul id="page-folders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             </ul>
                         </li>
-                        <li class="active">
+                        <li class="">
                             <a href="<?= BASE_URL ?>/index.php?route=admin" class="">
                                 <i class="lar la-star"></i><span>Admin</span>
                             </a>
@@ -266,8 +266,8 @@
                                                 <i class="las la-long-arrow-alt-down"></i>
                                             </div>
                                             <div class="media-body ml-3">
-                                                <p class="mb-0">Downloads</p>
-                                                <h5>12,594</h5>
+                                                <p class="mb-0">Espace restant</p>
+                                                <h5>3.9BG</h5>
                                             </div>
                                         </div>
                                     </div>
