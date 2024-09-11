@@ -92,6 +92,8 @@ switch ($route) {
         $users = $authController->getAllUser();
         if ($userselect != null){
             $infoUser = $authController->getinfoUser($userselect);
+        }else {
+            $infoUser = "";
         }
         $fileController->adminfiles($parentId, $userselect, $users, $infoUser);
 

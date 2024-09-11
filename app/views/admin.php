@@ -54,7 +54,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class=" ">
-                            <a href="" class="">
+                            <a href="<?= BASE_URL ?>/index.php?route=dash" class="">
                                 <i class="las la-home iq-arrow-left"></i><span>Dashboard</span>
                             </a>
                             <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -255,38 +255,9 @@
                                             <a class="bg-primary" data-toggle="modal" data-target="#addUser" style="cursor:pointer;"><i class="las la-user pr-2"></i>Ajouter</a>
                                         </div>
                                     </div>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un utilisateur</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="">
-                                                        <div class="form-group">
-                                                            <label for="instaurl">Nom :</label>
-                                                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="instaurl">Email :</label>
-                                                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John@email.com">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                    <button type="button" class="btn btn-primary">Ajouter</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="userTable" class="table table-striped table-bordered mt-4 " role="grid">
+                                    <table id="userTable" class="table table-striped table-bordered mt-4" role="grid">
                                         <thead>
                                             <tr>
                                                 <th scope="col"></th>
@@ -296,10 +267,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php 
-                                            foreach ($users as $user) { ?>
+                                            <?php foreach ($users as $user) { ?>
                                                 <tr name="info-user">
-                                                    <td class="text-center"><img class="rounded img-fluid avatar-40" src="../assets/images/user/01.jpg" alt="profile"></td>
+                                                    <td class="text-center"><img class="rounded img-fluid avatar-25" src="../assets/images/user/01.jpg" alt="profile"></td>
                                                     <td><?php echo $user['username']; ?></td>
                                                     <td><?php echo $user['email']; ?></td>
                                                     <td><?php
@@ -318,7 +288,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-3">
                                     <nav aria-label="Page navigation" id="userPagination">
                                         <ul class="pagination">
                                             <li class="page-item" id="previousPage">
@@ -342,11 +312,21 @@
                         <div class="card card-block card-stretch card-height">
                             <div class="card-body">
                                 <h4 class="card-title">Liste des Projets</h4>
-                                <!-- btn ajouter -->
-                                <div class="row text-right">
+                                <div class="row justify-content-between">
+                                    <!-- Search bar -->
+                                    <div class="col-sm-6 col-md-6">
+                                        <div id="user_list_datatable_info" class="dataTables_filter">
+                                            <form class="mr-3 position-relative">
+                                                <div class="form-group mb-0">
+                                                    <input type="search" class="form-control" id="exampleInputSearch" placeholder="Recherche d'utilisateur" aria-controls="user-list-table">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- btn ajouter + export pdf -->
                                     <div class="col-sm-6 col-md-6">
                                         <div class="user-list-files d-flex">
-                                            <a class="btn-success" href="javascript:void();"><i class="las la-user pr-2"></i>Ajouter</a>
+                                            <a class="bg-primary" data-toggle="modal" data-target="" style="cursor:pointer;"><i class="las la-user pr-2"></i>Ajouter</a>
                                         </div>
                                     </div>
                                 </div>
@@ -355,28 +335,19 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nom</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Langage</th>
-                                                <th scope="col">Icon</th>
                                                 <th scope="col">Date</th>
-                                                <th scope="col">Chemin</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($projects as $project) { ?>
                                                 <tr>
-                                                    <td style="font-size:13px;"><?php echo $project['title']; ?></td>
-                                                    <td style="font-size:13px;"><?php echo $project['spe_title']; ?></td>
-                                                    <td style="font-size:13px;"><?php echo $project['content']; ?></td>
-                                                    <td style="font-size:13px;"><?php echo $project['icon']; ?></td>
-                                                    <td style="font-size:13px;"><?php echo $project['project_date']; ?></td>
-                                                    <td style="font-size:13px;"><?php if ($project['path']) {
-                                                                                    echo $project['path'];
-                                                                                } ?></td>
+                                                    <td name="<?php echo $project['id']; ?>"><?php echo $project['title']; ?></td>
+                                                    <td><?php echo $project['project_date']; ?></td>
+
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
-                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
-                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                            <a style="color: #8f93f6;" class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier"><i data-toggle="modal" data-target="#EditProject" class="ri-pencil-line"></i></a>
+                                                            <a style="color: #8f93f6;" class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer"><i class="ri-delete-bin-line"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -384,17 +355,17 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-3">
                                     <nav aria-label="Page navigation" id="projectPagination">
                                         <ul class="pagination">
                                             <li class="page-item disabled">
-                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
                                             </li>
                                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                                             <li class="page-item">
-                                                <a class="page-link" href="#">Next</a>
+                                                <a class="page-link" href="#">Suivant</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -408,7 +379,9 @@
                         <div class="card card-block card-stretch card-height">
                             <div class="card-header d-flex flex-column flex-md-row justify-content-between pb-0">
                                 <!-- chemin -->
-                                <span class="mt-2 mt-md-0">Chemin : <a href="<?= BASE_URL ?>/index.php?route=admin"><?php if ($infouser != null) { echo $infoUserSelect['username'];}?></a>
+                                <span class="mt-2 mt-md-0">Chemin : <a href="<?= BASE_URL ?>/index.php?route=admin"><?php if ($userselect != null) {
+                                                                                                                        echo $infoUserSelect['username'];
+                                                                                                                    } ?></a>
                                     <?php foreach ($currentPath as $folder) : ?>
                                         / <a href="<?= BASE_URL ?>/index.php?route=admin&parent_id=<?= $folder['id'] ?>"><?= htmlspecialchars($folder['name']) ?></a>
                                     <?php endforeach; ?>
@@ -442,61 +415,63 @@
                                         <tbody>
                                             <?php
                                             if ($files != null) {
-                                            foreach ($files as $file) : ?>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="icon-small mr-2">
-                                                                <img width="38" src="../assets/images/icon/<?= $file['is_directory'] ? 'folder.png' : $this->getFileIcon($file['name']) ?>" alt="File">
+                                                foreach ($files as $file) : ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="icon-small mr-2">
+                                                                    <img width="38" src="../assets/images/icon/<?= $file['is_directory'] ? 'folder.png' : $this->getFileIcon($file['name']) ?>" alt="File">
+                                                                </div>
+                                                                <div>
+                                                                    <?php if ($file['is_directory']) : ?>
+                                                                        <a href="<?= BASE_URL ?>/index.php?route=admin&parent_id=<?= $file['id'] ?>&userselect=<?= $file['user_id'] ?>" class="folder"><?= htmlspecialchars($file['name']) ?></a>
+                                                                    <?php else : ?>
+                                                                        <span class="file"><?= htmlspecialchars($file['name'])  ?></span>
+                                                                    <?php endif; ?>
+                                                                </div>
                                                             </div>
-                                                            <div>
-                                                                <?php if ($file['is_directory']) : ?>
-                                                                    <a href="<?= BASE_URL ?>/index.php?route=admin&parent_id=<?= $file['id'] ?>&userselect=<?= $file['user_id'] ?>" class="folder"><?= htmlspecialchars($file['name']) ?></a>
-                                                                <?php else : ?>
-                                                                    <span class="file"><?= htmlspecialchars($file['name'])  ?></span>
-                                                                <?php endif; ?>
+                                                        </td>
+                                                        <td><?= $file['is_directory'] ? 'Dossier' : pathinfo($file['name'], PATHINFO_EXTENSION) ?></td>
+                                                        <td><?= $file['is_directory'] ? '-' : $this->formatSize($file['size']) ?></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
+                                                                    <i class="ri-more-fill"></i>
+                                                                </span>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
+                                                                    <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
+                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=delete&id=<?= $file['id'] ?>"><i class="ri-delete-bin-6-fill mr-2"></i>Supprimer</a>
+                                                                    <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
+                                                                    <?php if (!$file['is_directory']) : ?>
+                                                                        <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=download&id=<?= $file['id'] ?>"><i class="ri-file-download-fill mr-2"></i>Télécharger</a>
+                                                                    <?php endif; ?>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><?= $file['is_directory'] ? 'Dossier' : pathinfo($file['name'], PATHINFO_EXTENSION) ?></td>
-                                                    <td><?= $file['is_directory'] ? '-' : $this->formatSize($file['size']) ?></td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
-                                                                <i class="ri-more-fill"></i>
-                                                            </span>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                                <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
-                                                                <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=delete&id=<?= $file['id'] ?>"><i class="ri-delete-bin-6-fill mr-2"></i>Supprimer</a>
-                                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
-                                                                <?php if (!$file['is_directory']) : ?>
-                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=download&id=<?= $file['id'] ?>"><i class="ri-file-download-fill mr-2"></i>Télécharger</a>
-                                                                <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach;
+                                            } else {
+                                                foreach ($users as $user) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="icon-small mr-2">
+                                                                    <img class="rounded img-fluid avatar-25" src="../assets/images/user/01.jpg" alt="profile">
+                                                                </div>
+                                                                <div>
+                                                                    <!-- username -->
+                                                                    <?php if ($user['username']) { ?>
+                                                                        <!-- faire comme au dessus pour le chemin -->
+                                                                        <a href="<?= BASE_URL ?>/index.php?route=admin&userselect=<?= $user['id'] ?>" class="folder"><?php echo $user['username']; ?></a>
+                                                                    <?php } ?>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; } else { 
-                                            foreach ($users as $user) { ?>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="icon-small mr-2">
-                                                                <img class="rounded img-fluid avatar-40" src="../assets/images/user/01.jpg" alt="profile">
-                                                            </div>
-                                                            <div>
-                                                            <!-- username -->
-                                                                <?php if ($user['username']) { ?>
-                                                                    <!-- faire comme au dessus pour le chemin -->
-                                                                    <a href="<?= BASE_URL ?>/index.php?route=admin&userselect=<?= $user['id'] ?>" class="folder"><?php echo $user['username']; ?></a>
-                                                                <?php } ?>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>tailles des fichiers</td>
-                                                    <td>--</td>
-                                                </tr>
-                                            <?php }} ?>
+                                                        </td>
+                                                        <td>tailles des fichiers</td>
+                                                        <td>--</td>
+                                                    </tr>
+                                            <?php }
+                                            } ?>
                                         </tbody>
                                         <!-- nouveau dossiers -->
                                         <tbody id="nf"></tbody>
@@ -506,6 +481,82 @@
                         </div>
                     </div>
                     <!-- FIN Tableau file storage -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal user add -->
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un utilisateur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <label for="instaurl">Nom :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John">
+                        </div>
+                        <div class="form-group">
+                            <label for="instaurl">Email :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John@email.com">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal EditProject -->
+    <div class="modal fade" id="EditProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modifier un projet</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group mt-1 mb-1">
+                            <label for="instaurl">Nom :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John">
+                        </div>
+                        <div class="form-group mt-1 mb-1">
+                            <label for="instaurl">Description :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : Calculatrice égyptienne">
+                        </div>
+                        <div class="form-group mt-1 mb-1">
+                            <label for="instaurl">Langage :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : Java">
+                        </div>
+                        <div class="form-group mt-1 mb-1">
+                            <label for="instaurl">icon :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : fas fa-....">
+                        </div>
+                        <div class="form-group mt-1 mb-1">
+                            <label for="instaurl">Date :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : Fait le mm/aaaa">
+                        </div>
+                        <div class="form-group mt-1 mb-1">
+                            <label for="instaurl">Chemin :</label>
+                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : ./">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer mt-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Ajouter</button>
                 </div>
             </div>
         </div>
@@ -525,7 +576,33 @@
             </div>
         </div>
     </footer>
+    <script>
+        //permet de récup l'id pour del ou edit projet
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.getElementById('projectTable');
 
+            table.addEventListener('click', function(e) {
+                const target = e.target.closest('a');
+                if (!target) return;
+
+                const row = target.closest('tr');
+                if (!row) return;
+
+                const idCell = row.querySelector('td[name]');
+                if (!idCell) return;
+
+                const projectId = idCell.getAttribute('name');
+
+                if (target.querySelector('.ri-pencil-line')) {
+                    console.log('Modifier le projet avec l\'ID:', projectId);
+                    // Ajoutez ici la logique pour modifier le projet
+                } else if (target.querySelector('.ri-delete-bin-line')) {
+                    console.log('Supprimer le projet avec l\'ID:', projectId);
+                    // Ajoutez ici la logique pour supprimer le projet
+                }
+            });
+        });
+    </script>
     <!-- Backend Bundle JavaScript -->
     <script src="../assets/js/backend-bundle.min.js"></script>
     <!-- Chart Custom JavaScript -->

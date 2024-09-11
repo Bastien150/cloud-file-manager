@@ -108,7 +108,7 @@ class File {
 
     /* recup project */
     public function getProject(){
-        $sql = "SELECT title, spe_title, content, project_date, icon, path FROM projects";
+        $sql = "SELECT id, title, spe_title, content, project_date, icon, path FROM projects";
         return $this->db->query($sql, []);   
     }
 }

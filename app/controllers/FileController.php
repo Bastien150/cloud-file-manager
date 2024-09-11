@@ -180,7 +180,9 @@ class FileController {
             header('Location: ' . BASE_URL . '/index.php?route=login');
             exit;
         }
-        $infoUserSelect = $infoUserSelect[0];
+        if ($infoUserSelect && $infoUserSelect != ""){
+            $infoUserSelect = $infoUserSelect[0];
+        }
         $projects = $this->fileModel->getProject();
         $userId = $_SESSION['user_id'];
         $currentPath = $parentId ? $this->fileModel->getPath($parentId) : [];
