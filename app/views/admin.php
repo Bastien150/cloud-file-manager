@@ -243,7 +243,7 @@
                                         <div id="user_list_datatable_info" class="dataTables_filter">
                                             <form class="mr-3 position-relative">
                                                 <div class="form-group mb-0">
-                                                    <input type="search" class="form-control" id="exampleInputSearch" placeholder="Recherche d'utilisateur" aria-controls="user-list-table">
+                                                    <input type="search" class="form-control" id="SearchUser" placeholder="Recherche d'utilisateur" aria-controls="user-list-table">
                                                 </div>
                                             </form>
                                         </div>
@@ -266,13 +266,13 @@
                                                 <th scope="col">Date</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id=UserInfoTable>
                                             <?php foreach ($users as $user) { ?>
-                                                <tr name="info-user">
+                                                <tr name="info-user" class="rowUser">
                                                     <td class="text-center"><img class="rounded img-fluid avatar-25" src="../assets/images/user/01.jpg" alt="profile"></td>
-                                                    <td><?php echo $user['username']; ?></td>
-                                                    <td><?php echo $user['email']; ?></td>
-                                                    <td><?php
+                                                    <td class="username-info"><?php echo $user['username']; ?></td>
+                                                    <td class="usermemail-info"><?php echo $user['email']; ?></td>
+                                                    <td class="userdate-info"><?php
                                                         $date = new DateTime($user['created_at']);
                                                         $dateCreated = $date->format('d/m/Y');
                                                         echo $dateCreated; ?></td>
@@ -318,7 +318,7 @@
                                         <div id="user_list_datatable_info" class="dataTables_filter">
                                             <form class="mr-3 position-relative">
                                                 <div class="form-group mb-0">
-                                                    <input type="search" class="form-control" id="exampleInputSearch" placeholder="Recherche d'utilisateur" aria-controls="user-list-table">
+                                                    <input type="search" class="form-control" id="SearchProject" placeholder="Recherche d'utilisateur" aria-controls="user-list-table">
                                                 </div>
                                             </form>
                                         </div>
@@ -338,11 +338,11 @@
                                                 <th scope="col">Date</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="ProjectInfoTable">
                                             <?php foreach ($projects as $project) { ?>
-                                                <tr>
-                                                    <td name="<?php echo $project['id']; ?>"><?php echo $project['title']; ?></td>
-                                                    <td><?php echo $project['project_date']; ?></td>
+                                                <tr class="rowProject">
+                                                    <td class="projectname-info" name="<?php echo $project['id']; ?>"><?php echo $project['title']; ?></td>
+                                                    <td class="projectdate-info"><?php echo $project['project_date']; ?></td>
 
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
@@ -576,6 +576,49 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Fonction pour normaliser les accents
+        function normalizeString(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+        // Fonction de recherche
+        function searchUsers() {
+            const searchTerm = normalizeString(document.getElementById('SearchUser').value);
+            const RowinfoUser = document.querySelectorAll('#UserInfoTable .rowUser');
+
+            RowinfoUser.forEach(card => {
+                const Name = normalizeString(card.querySelector('.username-info').textContent);
+                const email = normalizeString(card.querySelector('.usermemail-info').textContent);
+                const date = normalizeString(card.querySelector('.userdate-info').textContent);
+
+                if (Name.includes(searchTerm) || email.includes(searchTerm) || date.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProjects() {
+            const searchTerm = normalizeString(document.getElementById('SearchProject').value);
+            const RowinfoProject = document.querySelectorAll('#ProjectInfoTable .rowProject');
+
+            RowinfoProject.forEach(card => {
+                const Name = normalizeString(card.querySelector('.projectname-info').textContent);
+                const date = normalizeString(card.querySelector('.projectdate-info').textContent);
+
+                if (Name.includes(searchTerm) || date.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Écouteur d'événement pour la recherche
+        document.getElementById('SearchUser').addEventListener('input', searchUsers);
+        document.getElementById('SearchProject').addEventListener('input', searchProjects);
+    </script>
     <script>
         //permet de récup l'id pour del ou edit projet
         document.addEventListener('DOMContentLoaded', function() {
