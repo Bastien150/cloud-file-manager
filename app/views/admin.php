@@ -269,18 +269,21 @@
                                         <tbody id=UserInfoTable>
                                             <?php foreach ($users as $user) { ?>
                                                 <tr name="info-user" class="rowUser">
-                                                    <td class="text-center"><img class="rounded img-fluid avatar-25" src="../assets/images/user/01.jpg" alt="profile"></td>
+                                                    <td class="text-center">
+                                                        <input type="text" id="Useridinput<?php echo $user['id']; ?>" value='<?php echo json_encode($user); ?>' hidden>
+                                                        <img class="rounded img-fluid avatar-25" src="../assets/images/user/01.jpg" alt="profile">
+                                                    </td>
                                                     <td class="username-info"><?php echo $user['username']; ?></td>
                                                     <td class="usermemail-info"><?php echo $user['email']; ?></td>
                                                     <td class="userdate-info"><?php
-                                                        $date = new DateTime($user['created_at']);
-                                                        $dateCreated = $date->format('d/m/Y');
-                                                        echo $dateCreated; ?></td>
+                                                                                $date = new DateTime($user['created_at']);
+                                                                                $dateCreated = $date->format('d/m/Y');
+                                                                                echo $dateCreated; ?></td>
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
-                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier" href="#"><i class="ri-pencil-line"></i></a>
+
                                                             <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer" href="#"><i class="ri-delete-bin-line"></i></a>
-                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Réinitialiser le mdp" href="#"><i class="fa-solid fa-lock"></i></a>
+                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Réinitialiser le mdp" href="#"><i class="fa-solid fa-arrows-rotate"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -343,7 +346,7 @@
                                                 <tr class="rowProject">
                                                     <td class="projectname-info" name="<?php echo $project['id']; ?>"><?php echo $project['title']; ?></td>
                                                     <td class="projectdate-info"><?php echo $project['project_date']; ?></td>
-
+                                                    <input type="text" id="projectidinput<?php echo $project['id']; ?>" value='<?php echo json_encode($project); ?>' hidden>
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
                                                             <a style="color: #8f93f6;" class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier"><i data-toggle="modal" data-target="#EditProject" class="ri-pencil-line"></i></a>
@@ -527,30 +530,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <!-- Form a faire pour update le form  gestion d'erreur ...-->
                     <form action="">
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Nom :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John">
+                            <input type="text" class="form-control" id="ProjNom" placeholder="Ex : John">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Description :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : Calculatrice égyptienne">
+                            <input type="text" class="form-control" id="ProjDesc" placeholder="Ex : Calculatrice égyptienne">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Langage :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : Java">
+                            <input type="text" class="form-control" id="ProjLang" placeholder="Ex : Java">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">icon :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : fas fa-....">
+                            <input type="text" class="form-control" id="ProjImg" placeholder="Ex : fas fa-....">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Date :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : Fait le mm/aaaa">
+                            <input type="text" class="form-control" id="ProjDate" placeholder="Ex : Fait le mm/aaaa">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Chemin :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : ./">
+                            <input type="text" class="form-control" id="ProjChemin" placeholder="Ex : ./">
                         </div>
                     </form>
                 </div>
@@ -637,11 +641,17 @@
                 const projectId = idCell.getAttribute('name');
 
                 if (target.querySelector('.ri-pencil-line')) {
-                    console.log('Modifier le projet avec l\'ID:', projectId);
-                    // Ajoutez ici la logique pour modifier le projet
+                    inputProject = JSON.parse(document.getElementById('projectidinput' + projectId).value)
+                    console.log(inputProject);
+
+                    document.getElementById('ProjNom').value = inputProject['title']
+                    document.getElementById('ProjDesc').value = inputProject['spe_title']
+                    document.getElementById('ProjLang').value = inputProject['content']
+                    document.getElementById('ProjImg').value = inputProject['icon']
+                    document.getElementById('ProjDate').value = inputProject['project_date']
+                    document.getElementById('ProjChemin').value = inputProject['path']
                 } else if (target.querySelector('.ri-delete-bin-line')) {
                     console.log('Supprimer le projet avec l\'ID:', projectId);
-                    // Ajoutez ici la logique pour supprimer le projet
                 }
             });
         });
@@ -670,6 +680,7 @@
     <!--Image viewer-->
     <script src="../assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js"></script>
     <!--officeToHtml-->
+    <script src="https://kit.fontawesome.com/6e4a6423de.js" crossorigin="anonymous"></script>
     <script src="../assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js"></script>
     <script src="../assets/js/doc-viewer.js"></script>
     <!-- app JavaScript -->

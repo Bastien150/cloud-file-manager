@@ -54,7 +54,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class=" ">
-                            <a href="" class="">
+                            <a href="<?= BASE_URL ?>/index.php?route=dash" class="">
                                 <i class="las la-home iq-arrow-left"></i><span>Dashboard</span>
                             </a>
                             <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
