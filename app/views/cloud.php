@@ -307,12 +307,16 @@
                                                                 <i class="ri-more-fill"></i>
                                                             </span>
                                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                                <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
-                                                                <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=delete&id=<?= $file['id'] ?>"><i class="ri-delete-bin-6-fill mr-2"></i>Supprimer</a>
-                                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
-                                                                <?php if (!$file['is_directory']) : ?>
-                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=download&id=<?= $file['id'] ?>"><i class="ri-file-download-fill mr-2"></i>Télécharger</a>
+                                                                <?php if ($file['is_directory']) : ?>
+                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=files&parent_id=<?= $file['id'] ?>"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
+                                                                <?php else : ?>
+                                                                    <!-- a faire ouvrir tout sorte de fichier et telecharger -->
+                                                                    <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
+                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=download&id=<?= $file['id'] ?>"><i class="ri-download-fill mr-2"></i>Télécharger</a>
+
                                                                 <?php endif; ?>
+                                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
+                                                                <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=delete&id=<?= $file['id'] ?>"><i class="ri-delete-bin-6-fill mr-2"></i>Supprimer</a>
                                                             </div>
                                                         </div>
                                                     </td>

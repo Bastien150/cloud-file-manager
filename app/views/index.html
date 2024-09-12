@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Widget LED Ruban</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
             background-color: #f0f0f0;
+            padding: 20px;
         }
 
         .widget {
             width: 100%;
             max-width: 350px;
+            min-width: 280px;
             padding: 20px;
             background-color: #333;
             border-radius: 10px;
@@ -26,17 +33,14 @@
 
         .main-container {
             display: flex;
-            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .circles-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .circle-row {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
         }
 
@@ -53,22 +57,26 @@
         }
 
         .power-button {
-            width: 50px;
-            height: 110px;
+            width: 60px;
+            height: 60px;
             background-color: #444;
             border: none;
-            border-radius: 25px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
-            color: #fff;
             transition: background-color 0.3s;
         }
 
         .power-button:hover {
             background-color: #555;
+        }
+
+        .power-button img {
+            width: 50%;
+            height: 50%;
+            object-fit: contain;
         }
 
         #brightness {
@@ -79,25 +87,79 @@
         .button-row {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
             margin-bottom: 10px;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 10px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            flex-grow: 1;
+            text-align: center;
         }
 
         .full-width {
             width: 100%;
         }
 
-        @media (max-width: 600px) {
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 400px) {
             .widget {
-                max-width: 100%;
+                padding: 15px;
+            }
+
+            .power-button {
+                width: 50px;
+                height: 50px;
+            }
+
+            .btn {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .circle {
+                width: 25px;
+                height: 25px;
             }
         }
     </style>
@@ -106,29 +168,25 @@
     <div class="widget">
         <div class="main-container">
             <div class="circles-container">
-                <div class="circle-row">
-                    <div class="circle" style="background-color: #FF0000;"></div>
-                    <div class="circle" style="background-color: #00FF00;"></div>
-                    <div class="circle" style="background-color: #0000FF;"></div>
-                    <div class="circle" style="background-color: #FFFF00;"></div>
-                    <div class="circle" style="background-color: #00FFFF;"></div>
-                </div>
-                <div class="circle-row">
-                    <div class="circle" style="background-color: #FF00FF;"></div>
-                    <div class="circle" style="background-color: #FFA500;"></div>
-                    <div class="circle" style="background-color: #800080;"></div>
-                    <div class="circle" style="background-color: #008000;"></div>
-                    <div class="circle" style="background-color: #FFC0CB;"></div>
-                </div>
-                <div class="circle-row">
-                    <div class="circle" style="background-color: #FFFFFF;"></div>
-                    <div class="circle" style="background-color: #FFD700;"></div>
-                    <div class="circle" style="background-color: #40E0D0;"></div>
-                    <div class="circle" style="background-color: #FF69B4;"></div>
-                    <div class="circle" style="background-color: #1E90FF;"></div>
-                </div>
+                <div class="circle" style="background-color: #FF0000;"></div>
+                <div class="circle" style="background-color: #00FF00;"></div>
+                <div class="circle" style="background-color: #0000FF;"></div>
+                <div class="circle" style="background-color: #FFFF00;"></div>
+                <div class="circle" style="background-color: #00FFFF;"></div>
+                <div class="circle" style="background-color: #FF00FF;"></div>
+                <div class="circle" style="background-color: #FFA500;"></div>
+                <div class="circle" style="background-color: #800080;"></div>
+                <div class="circle" style="background-color: #008000;"></div>
+                <div class="circle" style="background-color: #FFC0CB;"></div>
+                <div class="circle" style="background-color: #FFFFFF;"></div>
+                <div class="circle" style="background-color: #FFD700;"></div>
+                <div class="circle" style="background-color: #40E0D0;"></div>
+                <div class="circle" style="background-color: #FF69B4;"></div>
+                <div class="circle" style="background-color: #1E90FF;"></div>
             </div>
-            <button class="power-button"><img src="../../assets/images/power.png" alt=""></button>
+            <button class="power-button">
+                <img src="../../assets/images/power.png" alt="Power">
+            </button>
         </div>
         
         <input type="range" id="brightness" min="0" max="100" value="50">
@@ -138,21 +196,23 @@
             <button class="btn">Mode 2</button>
         </div>
         
-        <button class="btn full-width">Appliquer</button>
+        <button class="btn full-width" id="applyBtn">Appliquer</button>
     </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const brightnessSlider = document.getElementById('brightness');
             const circles = document.querySelectorAll('.circle');
             const powerButton = document.querySelector('.power-button');
+            const applyBtn = document.getElementById('applyBtn');
+            const modal = document.getElementById('myModal');
+            const closeBtn = document.querySelector('.close');
             let isPowerOn = true;
 
             brightnessSlider.addEventListener('input', function() {
-                const brightness = this.value / 100;
-                circles.forEach(circle => {
-                    circle.style.opacity = brightness;
-                });
+                const brightness = this.value;
+                console.log(brightness);                                
             });
 
             powerButton.addEventListener('click', function() {
@@ -170,8 +230,12 @@
                 circle.addEventListener('click', function() {
                     const color = this.style.backgroundColor;
                     console.log('Couleur sélectionnée:', color);
-                    // Ici, vous pouvez ajouter la logique pour appliquer la couleur au ruban LED
                 });
+            });
+
+            applyBtn.addEventListener('click', function() {
+                console.log("mettre la couleurs choisit");
+                
             });
         });
     </script>
