@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glubul | accueil</title>
+    <title>Glubul | Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
@@ -18,6 +18,139 @@
     <link rel="stylesheet" href="../assets/vendor/remixicon/fonts/remixicon.css">
 
 </head>
+<style>
+    .selected-circle {
+        border: 2px solid black !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .main-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .circles-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .circle:hover {
+        transform: scale(1.1);
+    }
+
+    .power-button {
+        width: 75px;
+        height: 75px;
+        background-color: #444;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s;
+    }
+
+
+    .power-button:hover {
+        background-color: #555;
+    }
+
+    .power-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    #brightness {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .button-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @media (max-width: 400px) {
+        .widget {
+            padding: 15px;
+        }
+
+        .power-button {
+            width: 50px;
+            height: 50px;
+        }
+
+        .btn {
+            padding: 8px;
+            font-size: 14px;
+        }
+    }
+</style>
 
 <body class="  ">
     <!-- loader Start -->
@@ -249,7 +382,7 @@
                         </div>
                     </div>
 
-
+                    <!-- Widjet Stockage -->
                     <div class="col-lg-4">
                         <div class="card card-block card-stretch card-height ">
                             <div class="card-header d-flex justify-content-between">
@@ -259,7 +392,7 @@
                             </div>
                             <div class="card-body">
                                 <div id="layout-1-chart" style="min-height: 220px;"></div>
-                                <div class="row mt-4">
+                                <div class="row mt-2">
                                     <div class="col-lg-6 col-md-6 col-6">
                                         <div class="media align-items-center">
                                             <div class="icon iq-icon-box bg-primary rounded icon-statistic">
@@ -286,169 +419,155 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-xl-8">
+
+                    <!-- Widjet Led -->
+                    <div class="col-lg-4 col-xl-4">
                         <div class="card card-block card-stretch card-height files-table">
                             <div class="card-header d-flex justify-content-between">
                                 <div class="header-title">
-                                    <h4 class="card-title">Files</h4>
+                                    <h4 class="card-title">Led</h4>
                                 </div>
                                 <div class="card-header-toolbar d-flex align-items-center">
                                     <a href="./page-files.html" class=" view-more">View All</a>
                                 </div>
                             </div>
-                            <div class="card-body pt-0">
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-borderless tbl-server-info">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Members</th>
-                                                <th scope="col">Last Edit</th>
-                                                <th scope="col">Size</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="icon-small bg-danger rounded mr-3">
-                                                            <i class="ri-file-excel-line"></i>
-                                                        </div>
-                                                        <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="../assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal" data-title="Weekly-report.pdf" style="cursor: pointer;">Weekly-report.pdf</div>
-                                                    </div>
-                                                </td>
-                                                <td>Me</td>
-                                                <td>jan 21, 2020 me</td>
-                                                <td>02 MB</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="dropdown-toggle" id="dropdownMenuButton6" data-toggle="dropdown">
-                                                            <i class="ri-more-fill"></i>
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton6">
-                                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="active">
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="icon-small bg-primary rounded mr-3">
-                                                            <i class="ri-file-download-line"></i>
-                                                        </div>
-                                                        <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="../assets/vendor/doc-viewer/files/demo.pdf" data-toggle="modal" data-target="#exampleModal" data-title="VueJs.pdf" style="cursor: pointer;">VueJs.pdf</div>
-                                                    </div>
-                                                </td>
-                                                <td>Poul Molive</td>
-                                                <td>jan 25, 2020 Poul Molive</td>
-                                                <td>64 MB</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="dropdown-toggle" id="dropdownMenuButton7" data-toggle="dropdown">
-                                                            <i class="ri-more-fill"></i>
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton7">
-                                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="icon-small bg-info rounded mr-3">
-                                                            <i class="ri-file-excel-line"></i>
-                                                        </div>
-                                                        <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="../assets/vendor/doc-viewer/files/demo.docx" data-toggle="modal" data-target="#exampleModal" data-title="Milestone.docx" style="cursor: pointer;">Milestone.docx</div>
-                                                    </div>
-                                                </td>
-                                                <td>Me</td>
-                                                <td>Mar 30, 2020 Gail Forcewind</td>
-                                                <td>30 MB</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="dropdown-toggle" id="dropdownMenuButton8" data-toggle="dropdown">
-                                                            <i class="ri-more-fill"></i>
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton8">
-                                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="icon-small bg-success rounded mr-3">
-                                                            <i class="ri-file-excel-line"></i>
-                                                        </div>
-                                                        <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="../assets/vendor/doc-viewer/files/demo.xlsx" data-toggle="modal" data-target="#exampleModal" data-title="Training center.xlsx" style="cursor: pointer;">Training center.xlsx</div>
-                                                    </div>
-                                                </td>
-                                                <td>Me</td>
-                                                <td>Mar 30, 2020 Gail Forcewind</td>
-                                                <td>10 MB</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="dropdown-toggle" id="dropdownMenuButton09" data-toggle="dropdown">
-                                                            <i class="ri-more-fill"></i>
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton09">
-                                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="icon-small bg-warning rounded mr-3">
-                                                            <i class="ri-file-excel-line"></i>
-                                                        </div>
-                                                        <div data-load-file="file" data-load-target="#resolte-contaniner" data-url="../assets/vendor/doc-viewer/files/demo.pptx" data-toggle="modal" data-target="#exampleModal" data-title="Flavour.pptx" style="cursor: pointer;">Flavour.pptx</div>
-                                                    </div>
-                                                </td>
-                                                <td>Me</td>
-                                                <td>Mar 30, 2020 Gail Forcewind</td>
-                                                <td>10 MB</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <span class="dropdown-toggle" id="dropdownMenuButton9" data-toggle="dropdown">
-                                                            <i class="ri-more-fill"></i>
-                                                        </span>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton9">
-                                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                                            <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <div class="card-body pt-0 mt-4">
+                                <div class="widget">
+                                    <form method="POST" action="<?= BASE_URL ?>/index.php?route=dash">
+                                        <div class="main-container">
+                                            <div class="circles-container">
+                                                <?php
+                                                // Lire la luminosité depuis brightness.txt
+                                                $brightness = file_get_contents('brightness.txt');
+                                                $brightness = max(0, min(255, intval($brightness)));
+
+                                                // Lire l'état LED depuis led_state.txt
+                                                $led_state = trim(file_get_contents('led_state.txt'));
+
+                                                list($red, $green, $blue) = explode(',', $led_state);
+                                                $red = max(0, min(255, intval($red)));
+                                                $green = max(0, min(255, intval($green)));
+                                                $blue = max(0, min(255, intval($blue)));
+                                                $isPowerOn = ($red > 0 || $green > 0 || $blue > 0);
+
+                                                //api led esp demande  json color + bright
+                                                if (isset($_GET['device']) && $_GET['device'] === 'esp8266') {
+                                                    header('Content-Type: application/json');
+                                                    echo json_encode(['color' => $led_state, 'bright' => $brightness]);
+                                                    exit;
+                                                }
+                                                // Fonction pour déterminer si une couleur est sélectionnée
+                                                function isColorSelected($color, $red, $green, $blue)
+                                                {
+                                                    list($r, $g, $b) = explode(',', $color);
+                                                    return trim($r) == $red*2 && trim($g) == $green*2 && trim($b) == $blue*2;
+                                                }
+
+                                                $colors = [
+                                                    "254, 0, 0",
+                                                    "0, 254, 0",
+                                                    "0, 0, 254",
+                                                    "254, 254, 0",
+                                                    "0, 254, 254",
+                                                    "254, 0, 254",
+                                                    "254, 165, 0",
+                                                    "128, 0, 128",
+                                                    "0, 128, 0",
+                                                    "255, 192, 203",
+                                                    "254, 254, 254",
+                                                    "254, 215, 0",
+                                                    "64, 224, 208",
+                                                    "255, 105, 180",
+                                                    "30, 144, 254"
+                                                ];
+
+                                                foreach ($colors as $color) {
+                                                    $isSelected = isColorSelected($color, $red, $green, $blue);
+                                                    echo "<div class='cercle btn btn-sm rounded-circle p-0" . ($isSelected ? " selected-circle" : "") . "' style='width: 30px; height: 30px; background-color: rgb($color); opacity: " . ($isPowerOn ? '1' : '0') . "'></div>";
+                                                }
+                                                ?>
+                                            </div>
+                                            <button type="button" class="power-button" style="background-color: <?php echo $isPowerOn ? '#444' : '#ff0000'; ?>">
+                                                <img src="power-button.png" alt="Power" />
+                                            </button>
+                                        </div>
+                                        <!-- js led -->
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                const brightnessSlider = document.getElementById("brightness");
+                                                const circles = document.querySelectorAll(".cercle");
+                                                const powerButton = document.querySelector(".power-button");
+                                                const redInput = document.getElementById("red");
+                                                const greenInput = document.getElementById("green");
+                                                const blueInput = document.getElementById("blue");
+                                                const powerInput = document.getElementById("power");
+                                                let isPowerOn = <?php echo $isPowerOn ? 'true' : 'false'; ?>;
+
+                                                brightnessSlider.addEventListener("input", function() {
+                                                    console.log("Luminosité : " + this.value);
+                                                });
+
+                                                powerButton.addEventListener("click", function() {
+                                                    isPowerOn = !isPowerOn;
+                                                    if (isPowerOn) {
+                                                        circles.forEach((circle) => (circle.style.opacity = "1"));
+                                                        this.style.backgroundColor = "#444";
+                                                        powerInput.value = "on";
+                                                        if (redInput.value === "0" && greenInput.value === "0" && blueInput.value === "0") {
+                                                            redInput.value = greenInput.value = blueInput.value = "255";
+                                                        }
+                                                    } else {
+                                                        circles.forEach((circle) => (circle.style.opacity = "0"));
+                                                        this.style.backgroundColor = "#ff0000";
+                                                        powerInput.value = "off";
+                                                        redInput.value = greenInput.value = blueInput.value = "0";
+                                                    }
+                                                });
+
+                                                circles.forEach((circle) => {
+                                                    circle.addEventListener("click", function() {
+                                                        const color = this.style.backgroundColor;
+                                                        console.log("Couleur sélectionnée:", color);
+
+                                                        circles.forEach((c) => c.classList.remove("selected-circle"));
+                                                        this.classList.add("selected-circle");
+
+                                                        const rgb = color.match(/\d+/g);
+                                                        redInput.value = Math.round(rgb[0] / 2);
+                                                        greenInput.value = Math.round(rgb[1] / 2);
+                                                        blueInput.value = Math.round(rgb[2] / 2);
+
+                                                        if (!isPowerOn) {
+                                                            isPowerOn = true;
+                                                            powerInput.value = "on";
+                                                            powerButton.style.backgroundColor = "#444";
+                                                            circles.forEach((circle) => (circle.style.opacity = "1"));
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                        <input type="range" id="brightness" name="brightness" min="0" max="255" value="<?php echo $brightness; ?>" />
+
+                                        <div class="button-row">
+                                            <button type="button" class="btn btn-primary">Mode 1</button>
+                                            <button type="button" class="btn btn-primary">Mode 2</button>
+                                        </div>
+
+                                        <input type="hidden" id="red" name="red" value="<?php echo $red; ?>">
+                                        <input type="hidden" id="green" name="green" value="<?php echo $green; ?>">
+                                        <input type="hidden" id="blue" name="blue" value="<?php echo $blue; ?>">
+                                        <input type="hidden" id="power" name="power" value="<?php echo $isPowerOn ? 'on' : 'off'; ?>">
+
+                                        <button type="submit" class="btn btn-primary full-width" id="applyBtn">Appliquer</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        a faire
                     </div>
                 </div>
             </div>

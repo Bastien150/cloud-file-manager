@@ -20,6 +20,26 @@ switch ($route) {
         }
         exit;
     case 'dash' :
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $brightness = max(0, min(255, intval($_POST['brightness'])));
+            $power = $_POST['power'];
+
+            // Fonction pour mettre à jour les fichiers
+            function updateFiles($brightness, $red, $green, $blue)
+            {
+                file_put_contents('brightness.txt', $brightness);
+                file_put_contents('led_state.txt', "$red,$green,$blue");
+            }
+
+            if ($power === 'on') {
+                $red = max(0, min(255, intval($_POST['red'])));
+                $green = max(0, min(255, intval($_POST['green'])));
+                $blue = max(0, min(255, intval($_POST['blue'])));
+            } else {
+                $red = $green = $blue = 0;
+            }
+            updateFiles($brightness, $red, $green, $blue);
+            }
         require_once __DIR__ . '/../app/views/index.php';
         exit;
     case 'login':
