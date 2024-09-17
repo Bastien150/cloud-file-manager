@@ -2,6 +2,9 @@
 upload files dans le dossiers user
 ------------------
 Cloud
+
+ouvrir fichier (pdf, png, txt, pptx, xls, docx, jpeg)
+
 finir modifier fenetre modal
 form -> public edit file 
 _
