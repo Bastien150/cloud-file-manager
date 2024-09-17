@@ -315,7 +315,7 @@
                                                                     <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=download&id=<?= $file['id'] ?>"><i class="ri-download-fill mr-2"></i>Télécharger</a>
 
                                                                 <?php endif; ?>
-                                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
+                                                                <a class="dropdown-item" data-toggle="modal" data-target="#addUser" href="#" onclick="editFile(<?= $file['id'] ?>, <?= $file['is_directory'] ? 'true' : 'false' ?>, '<?= htmlspecialchars($file['name'], ENT_QUOTES) ?>')"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
                                                                 <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=delete&id=<?= $file['id'] ?>"><i class="ri-delete-bin-6-fill mr-2"></i>Supprimer</a>
                                                             </div>
                                                         </div>
@@ -335,7 +335,36 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un utilisateur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <label for="instaurl">Nom du fichier / dossier :</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="editFileName" placeholder="">
+                                <input type="hidden" name="editFileid" id="editFileId">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="editFileExtension"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Popup uploads files -->
     <div>
         <!-- Bouton open popup -->
@@ -343,7 +372,7 @@
             <i class="fas fa-chevron-up"></i>
         </button>
 
-        <!-- drag and drop popup upload fichiers -->
+        <!-- drag and drop add files -->
         <div id="popup" class="p-4">
             <h4 class="mb-4">Déposez vos fichiers</h4>
             <form id="upload-form" action="<?= BASE_URL ?>/index.php?route=upload" method="post" enctype="multipart/form-data">
@@ -352,7 +381,7 @@
                     Glissez et déposez vos fichiers ou cliquez
                 </div>
                 <div id="file-list" class="mb-3"></div>
-                <input type="hidden" name="parent_id" value="<?php echo $parentId; ?>"> <!-------------------  A FAIRE ----------------------- -->
+                <input type="hidden" name="parent_id" value="<?php echo $parentId; ?>">
                 <button id="validate-btn" class="btn btn-primary" disabled>Valider les fichiers</button>
             </form>
         </div>
@@ -372,7 +401,24 @@
             </div>
         </div>
     </footer>
+    <script>
+    function editFile(fileId, isDirectory, fileName) {
+        // Prevent the default link behavior
+        event.preventDefault();
 
+        // Split the fileName into name and extension
+        let fileNameParts = fileName.split('.');
+        let fileNameWithoutExtension = fileNameParts[0];
+        let fileExtension = fileNameParts.length > 1 ? '.' + fileNameParts[fileNameParts.length - 1] : '';
+        // Populate the form
+        document.getElementById('editFileId').value = fileId;
+        document.getElementById('editFileName').placeholder = fileNameWithoutExtension;
+        document.getElementById('editFileExtension').textContent = fileExtension;
+
+        // Open the modal
+        $('#addUser').modal('show');
+    }
+</script>
     <!-- Backend Bundle JavaScript -->
     <script src="../assets/js/backend-bundle.min.js"></script>
 

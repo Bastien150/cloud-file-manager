@@ -2,6 +2,8 @@
 upload files dans le dossiers user
 ------------------
 Cloud
+finir modifier fenetre modal
+form -> public edit file 
 _
 trie :
 ordre alpha ; type fichiers ; taille
