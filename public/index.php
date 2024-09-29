@@ -77,8 +77,10 @@ switch ($route) {
         exit;
 
     case 'files':
+        $newFileName = isset($_POST['editFileName']) ? $_POST['editFileName'] : '';
+        $fileId = isset($_POST['editFileid']) ? $_POST['editFileid'] : '';
         $parentId = $_GET['parent_id'] ?? null;
-        $fileController->index($parentId);
+        $fileController->index($parentId, $fileId, $newFileName);
         break;
 
     case 'create_directory':

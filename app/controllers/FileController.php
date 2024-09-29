@@ -9,12 +9,15 @@ class FileController {
     }
 
     /* accédé au cloud */
-    public function index($parentId = null) {
+    public function index($parentId = null, $editFileId = null, $editFileNewName = null) {
         if (!isset($_SESSION['user_id'])) {
             header('Location: ' . BASE_URL . '/index.php?route=login');
             exit;
         }
-
+        //edit files
+        if ($editFileId != null && $editFileNewName != null) {
+            $filesupdate = $this->fileModel->updateNameFile($editFileId, $editFileNewName);
+        }
         $userId = $_SESSION['user_id'];
         $files = $this->fileModel->getByUserIdAndParentId($userId, $parentId);
         $currentPath = $parentId ? $this->fileModel->getPath($parentId) : [];

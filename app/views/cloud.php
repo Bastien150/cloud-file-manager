@@ -338,30 +338,30 @@
     <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un utilisateur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
+                <form action="<?= BASE_URL ?>/index.php?route=files" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modifier le nom d'un fichier</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="instaurl">Nom du fichier / dossier :</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="editFileName" placeholder="">
+                                <input type="text" class="form-control" id="editFileName" name="editFileName" placeholder="">
                                 <input type="hidden" name="editFileid" id="editFileId">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="editFileExtension"></span>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Modifier</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -402,23 +402,23 @@
         </div>
     </footer>
     <script>
-    function editFile(fileId, isDirectory, fileName) {
-        // Prevent the default link behavior
-        event.preventDefault();
+        function editFile(fileId, isDirectory, fileName) {
+            // Prevent the default link behavior
+            event.preventDefault();
 
-        // Split the fileName into name and extension
-        let fileNameParts = fileName.split('.');
-        let fileNameWithoutExtension = fileNameParts[0];
-        let fileExtension = fileNameParts.length > 1 ? '.' + fileNameParts[fileNameParts.length - 1] : '';
-        // Populate the form
-        document.getElementById('editFileId').value = fileId;
-        document.getElementById('editFileName').placeholder = fileNameWithoutExtension;
-        document.getElementById('editFileExtension').textContent = fileExtension;
+            // Split the fileName into name and extension
+            let fileNameParts = fileName.split('.');
+            let fileNameWithoutExtension = fileNameParts[0];
+            let fileExtension = fileNameParts.length > 1 ? '.' + fileNameParts[fileNameParts.length - 1] : '';
+            // Populate the form
+            document.getElementById('editFileId').value = fileId;
+            document.getElementById('editFileName').placeholder = fileNameWithoutExtension;
+            document.getElementById('editFileExtension').textContent = fileExtension;
 
-        // Open the modal
-        $('#addUser').modal('show');
-    }
-</script>
+            // Open the modal
+            $('#addUser').modal('show');
+        }
+    </script>
     <!-- Backend Bundle JavaScript -->
     <script src="../assets/js/backend-bundle.min.js"></script>
 

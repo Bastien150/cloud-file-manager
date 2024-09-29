@@ -111,4 +111,9 @@ class File {
         $sql = "SELECT id, title, spe_title, content, project_date, icon, path FROM projects";
         return $this->db->query($sql, []);   
     }
+
+    public function updateNameFile($id, $newname){
+        $sql = "UPDATE files SET name = ? where id = ?";
+        $this->db->query($sql, [$newname, $id]);
+    }
 }
