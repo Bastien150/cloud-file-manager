@@ -74,8 +74,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Se connecter</button>
                                 <p class="mt-3">
-                                    Pas de compte ? <a href="<?= BASE_URL ?>/index.php?route=register" class="text-primary">Crée en un !</a>
+                                    Pas de compte ? <a href="" class="text-primary">Paye looser</a>
                                 </p>
+                                <!-- < BASE_URL>/index.php?route=register -->
                             </form>
                         </div>
                     </div>

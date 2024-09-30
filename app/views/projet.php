@@ -82,8 +82,8 @@
                             </ul>
                         </li>
                         <li class=" ">
-                            <a href="<?= BASE_URL ?>/index.php?route=admin" class="">
-                                <i class="lar la-star"></i><span>Admin</span>
+                            <a href="" class="">
+                                <i class="lar la-star"></i><span>Autre</span>
                             </a>
                             <ul id="page-fevourite" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             </ul>

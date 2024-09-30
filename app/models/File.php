@@ -113,7 +113,7 @@ class File {
     }
 
     public function updateNameFile($id, $newname){
-        $sql = "UPDATE files SET name = ? where id = ?";
+        $sql = "UPDATE files SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         $this->db->query($sql, [$newname, $id]);
     }
 }

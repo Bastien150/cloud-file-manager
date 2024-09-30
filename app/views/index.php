@@ -410,8 +410,8 @@
                                                 <i class="las la-long-arrow-alt-up"></i>
                                             </div>
                                             <div class="media-body ml-3">
-                                                <p class="mb-0">Uploads</p>
-                                                <h5>1,458</h5>
+                                                <p class="mb-0">vide</p>
+                                                <h5>--</h5>
                                             </div>
                                         </div>
                                     </div>

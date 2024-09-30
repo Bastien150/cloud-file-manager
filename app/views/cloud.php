@@ -75,8 +75,8 @@
                             </ul>
                         </li>
                         <li class=" ">
-                            <a href="<?= BASE_URL ?>/index.php?route=admin" class="">
-                                <i class="lar la-star"></i><span>Admin</span>
+                            <a href="" class="">
+                                <i class="lar la-star"></i><span>Autre</span>
                             </a>
                             <ul id="page-fevourite" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             </ul>
@@ -294,7 +294,8 @@
                                                                 <?php if ($file['is_directory']) : ?>
                                                                     <a href="<?= BASE_URL ?>/index.php?route=files&parent_id=<?= $file['id'] ?>" class="folder"><?= htmlspecialchars($file['name']) ?></a>
                                                                 <?php else : ?>
-                                                                    <span class="file"><?= htmlspecialchars($file['name'])  ?></span>
+                                                                    
+                                                                    <a type="button" data-title="<?= htmlspecialchars($file['name']) ?>" data-load-file="file"  data-load-target="#resolte-contaniner" data-url="<?= $this->openfile($file['name'], $file['id'] ) ?>" data-toggle="modal" data-target="#exampleModal"><?= htmlspecialchars($file['name'])  ?></a>
                                                                 <?php endif; ?>
                                                             </div>
                                                         </div>
@@ -365,6 +366,28 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header justify-content-between">
+                    <h4 class="modal-title"></h4>
+                    <div>
+                        <a type="button" class="btn" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="resolte-contaniner" style="height: 500px; overflow: auto;">
+                        File not found
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Popup uploads files -->
     <div>
         <!-- Bouton open popup -->
@@ -405,7 +428,6 @@
         function editFile(fileId, isDirectory, fileName) {
             // Prevent the default link behavior
             event.preventDefault();
-
             // Split the fileName into name and extension
             let fileNameParts = fileName.split('.');
             let fileNameWithoutExtension = fileNameParts[0];
@@ -414,7 +436,9 @@
             document.getElementById('editFileId').value = fileId;
             document.getElementById('editFileName').placeholder = fileNameWithoutExtension;
             document.getElementById('editFileExtension').textContent = fileExtension;
-
+            setTimeout(function() {
+                document.getElementById('editFileName').select();
+            }, 600);
             // Open the modal
             $('#addUser').modal('show');
         }

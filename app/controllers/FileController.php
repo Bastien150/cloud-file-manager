@@ -245,4 +245,17 @@ class FileController {
                 return 'unknown.png';
         }
     }
+    
+    public function openfile($fileName, $id) {
+        $path = $this->fileModel->getById($id);
+        $allowedExtensions = ['pdf', 'pptx', 'ppt', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'gif', 'doc', 'docx'];
+        
+        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        
+        if (in_array($extension, $allowedExtensions)) {
+            return "../uploads/user_" . $path['user_id'] . "/" . $path['path'];
+        }
+        
+        return null;
+    }
 }

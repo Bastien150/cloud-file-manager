@@ -5,15 +5,14 @@ Cloud
 
 ouvrir fichier (pdf, png, txt, pptx, xls, docx, jpeg)
 
-finir modifier fenetre modal
-form -> public edit file 
 _
 trie :
 ordre alpha ; type fichiers ; taille
 parent id a finir
 ------------------
-dashboard
+Projets 
 
+accédé au projets avec le boutons
 _
 ------------------
 admin page
