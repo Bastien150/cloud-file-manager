@@ -69,4 +69,12 @@ class AuthController {
         require_once __DIR__ . '/../views/profile-edit.php';
     }
 
+    public function addUserAdmin($username, $password){
+        $this->userModel->create($username, "", $password);
+    }
+
+    public function delUserAdmin ($id){
+        $this->userModel->deleteUserAndFile($id);
+    }
+
 }

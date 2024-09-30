@@ -42,3 +42,4 @@ modifier info (nom email mdp)
 ajout avatar
 ------------------
 partage fichiers entre user (accès téléchargement visualisation)
+lors de la suppréssion supprimer le vrais fichier/dossier

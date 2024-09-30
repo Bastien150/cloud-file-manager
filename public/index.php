@@ -123,15 +123,25 @@ switch ($route) {
         break;
 
     case 'addUserAdmin':
-        /* a faire */
+        $uUsername = $_POST['addUserAdminName'];
+        $uPassword = $_POST['addUserAdminPass'];
+        $authController->addUserAdmin($uUsername, $uPassword);
+        header('Location: ' . BASE_URL . '/index.php?route=admin');
         break;
+    case 'delUserAdmin':
+        $delUser = $_GET['uid'];
+        $authController->delUserAdmin($delUser);
+        header('Location: ' . BASE_URL . '/index.php?route=admin');
+        break;
+
     case 'UpdatePassword':
         $newpass = $_POST['npass'];
         $lastpassword = $_POST['cpass'];
         $authController->updatePassword($newpass, $lastpassword, $_SESSION['username']);
+
         break;
     case 'editusers':
-        
+
         $authController->editUserPage();
         break;
 

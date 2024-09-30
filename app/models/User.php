@@ -47,4 +47,13 @@ class User {
         $sql = "UPDATE users SET password = ? WHERE id = ?";
         $this->db->query($sql, [$hashedPassword, $id]);
     }
+
+    public function deleteUserAndFile($id){
+        /* del file du user */
+        $sql = "DELETE FROM files WHERE user_id = ?";
+        $this->db->query($sql, [$id]);
+        /* del user */
+        $sql = "DELETE FROM users WHERE id = ?";
+        $this->db->query($sql, [$id]);
+    }
 }

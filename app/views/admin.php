@@ -281,8 +281,7 @@
                                                                                 echo $dateCreated; ?></td>
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
-
-                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer" href="<?= BASE_URL ?>/index.php?route=delUserAdmin&uid=<?= $user['id']?>"><i class="ri-delete-bin-line"></i></a>
                                                             <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Réinitialiser le mdp" href="#"><i class="fa-solid fa-arrows-rotate"></i></a>
                                                         </div>
                                                     </td>
@@ -493,28 +492,29 @@
     <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un utilisateur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
+                <form method="POST" action="<?= BASE_URL ?>/index.php?route=addUserAdmin">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un utilisateur</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="instaurl">Nom :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John">
+                            <input type="text" class="form-control" name="addUserAdminName" placeholder="Ex : John">
                         </div>
                         <div class="form-group">
-                            <label for="instaurl">Email :</label>
-                            <input type="text" class="form-control" id="instaurl" placeholder="Ex : John@email.com">
+                            <label for="instaurl">Mdp :</label>
+                            <input type="text" class="form-control" name="addUserAdminPass" placeholder="">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary">Ajouter</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
