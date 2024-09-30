@@ -49,4 +49,24 @@ class AuthController {
     public function getAllUser() {
         return $this->userModel->getAllUser();
     }
+
+    public function getUsernames() {
+        return $this->userModel->getUsernames();
+    }
+
+    //change le mdp si l'ancien est le bon et 
+    public function updatePassword($newpass, $password, $username) {
+        $user = $this->userModel->findByusername($username);
+        if ($user && $this->userModel->verifyPassword($password, $user['password'])){
+            $this->userModel->updatePassword($newpass);
+        }
+        /* sinon erreur */
+        return $this->editUserPage();
+    }
+
+    public function editUserPage(){
+
+        require_once __DIR__ . '/../views/profile-edit.php';
+    }
+
 }

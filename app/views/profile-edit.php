@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Glubul | Cloud</title>
+    <title>Glubul | Profile</title>
 
     <!-- Favicon -->
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -31,15 +31,16 @@
     <link rel="stylesheet" href="../assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.css">
 </head>
 
-<body>
-    <!-- loader -->
+<body class="  ">
+    <!-- loader Start -->
     <div id="loading">
         <div id="loading-center">
         </div>
     </div>
-
-    <!-- Content -->
+    <!-- loader END -->
+    <!-- Wrapper Start -->
     <div class="wrapper">
+
         <!-- Bandeau navigation gauche  -->
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
@@ -96,7 +97,6 @@
             </div>
         </div>
 
-        <!-- bar de navigation (logo, search-bar, icon)-->
         <div class="iq-top-navbar">
             <div class="iq-navbar-custom">
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
@@ -143,12 +143,14 @@
                         </form>
                     </div>
 
+                    <!-- bar de navigation (logo, search-bar, icon)-->
                     <div class="d-flex align-items-center">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
                             <i class="ri-menu-3-line"></i>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                                <!-- search bar -->
                                 <li class="nav-item nav-icon search-content">
                                     <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="ri-search-line"></i>
@@ -205,10 +207,10 @@
                                                                 echo substr($infouser['username'], 0, 1);
                                                             } ?></div>
                                                         <div class="profile-detail mt-3">
-                                                            <h5><a href="<?= BASE_URL ?>/index.php?route=editusers" ><?php if (isset($_SESSION['info_user'])) {
-                                                                                                            $infouser = $_SESSION['info_user'][0];
-                                                                                                            echo $infouser['username'];
-                                                                                                        } ?></a></h5>
+                                                            <h5><a href="<?= BASE_URL ?>/index.php?route=editusers"><?php if (isset($_SESSION['info_user'])) {
+                                                                                                                        $infouser = $_SESSION['info_user'][0];
+                                                                                                                        echo $infouser['username'];
+                                                                                                                    } ?></a></h5>
                                                             <p><?php if (isset($infouser['email'])) {
                                                                     echo $infouser['email'];
                                                                 } ?></p>
@@ -220,7 +222,6 @@
                                         </div>
                                     </div>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
@@ -231,186 +232,99 @@
         <div class="content-page">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card card-block card-stretch card-transparent">
-                            <div class="card-header d-flex flex-column flex-md-row justify-content-between pb-0">
-                                <div class="header-title mb-5 mb-md-0 mt-3 mt-md-0"> <!-- Ajout de mt-3 pour les petits écrans -->
-                                    <h4 class="card-title">Vos documents</h4>
-                                </div>
-                                <!-- chemin -->
-                                <span class="mt-2 mt-md-0">Chemin : <a href="<?= BASE_URL ?>/index.php?route=files">Accueil</a>
-                                    <?php foreach ($currentPath as $folder) : ?>
-                                        / <a href="<?= BASE_URL ?>/index.php?route=files&parent_id=<?= $folder['id'] ?>"><?= htmlspecialchars($folder['name']) ?></a>
-                                    <?php endforeach; ?>
-                                </span>
-                                <!-- trie -->
-                                <div class="card-header-toolbar d-flex align-items-center mt-2 mt-md-0">
-                                    <div class="dropdown">
-                                        <span>Trié par : </span>
-                                        <span class="dropdown-toggle dropdown-bg btn bg-white" id="dropdownMenuButton001" data-toggle="dropdown">
-                                            Ordre alphabétique<i class="ri-arrow-down-s-line ml-1"></i>
-                                        </span>
-                                        <div class="dropdown-menu dropdown-menu-right shadow-none" aria-labelledby="dropdownMenuButton001">
-                                            <a class="dropdown-item">Ordre alphabétique</a>
-                                            <a class="dropdown-item">Croissant</a>
-                                            <a class="dropdown-item">Décroissant</a>
+                    <div class="col-lg-12">
+                        <div class="tab-content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <!-- card name + avatar -->
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <div class="iq-header-title">
+                                                    <h4 class="card-title">Informations Perso.</h4>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <form>
+                                                    <div class="form-group row align-items-center">
+                                                        <div class="col-md-12" style="margin-top: -21px;">
+                                                            <div class="profile-img-edit">
+                                                                <div class="crm-profile-img-edit">
+                                                                    <img class="crm-profile-pic rounded-circle avatar-100" src="../assets/images/user/11.png" alt="profile-pic">
+                                                                    <div class="crm-p-image bg-primary">
+                                                                        <i class="las la-pen upload-button"></i>
+                                                                        <input class="file-upload" type="file" accept="image/*">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="fname">Nom :</label>
+                                                            <input type="text" class="form-control" id="fname" value="<?= $_SESSION['username'] ?>">
+                                                        </div>
+                                                        <div class="form-group col-sm-6">
+                                                            <label for="fname">Email :</label>
+                                                            <input type="email" class="form-control" id="email">
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mr-2">Changer</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <!-- card password -->
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <div class="iq-header-title">
+                                                    <h4 class="card-title">Modifier le Mot de Passe</h4>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <form action="<?= BASE_URL ?>/index.php?route=UpdatePassword" method="post">
+                                                    <div class="form-group">
+                                                        <label for="cpass">Mot de Passe actuel:</label>
+                                                        <input type="Password" class="form-control" name="cpass" value="">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="npass">Nouveau Mot de Passe:</label>
+                                                        <input type="Password" class="form-control" name="npass" value="">
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary mr-2">Changer</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <div class="iq-header-title">
+                                                    <h4 class="card-title">Email et SMS</h4>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <form>
+                                                    <div class="form-group row align-items-center"> <label class="col-md-3" for="emailnotification">Notification par email :</label>
+                                                        <div class="col-md-9 custom-control custom-switch"> <input type="checkbox" class="custom-control-input" id="emailnotification" checked=""> <label class="custom-control-label" for="emailnotification"></label> </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mr-2">Envoyer</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    <!-- Tableau file storage -->
-                    <div class="col-lg-12">
-                        <div class="card card-block card-stretch card-height">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-borderless tbl-server-info">
-                                        <div class="select-dropdown input-prepend input-append">
-                                            <div class="btn-group">
-                                                <div class="search-query selet-caption" id="createNewFile" style="cursor:pointer;"><i class="las la-plus pr-2"></i>Ajouter</div>
-                                            </div>
-                                        </div>
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Taille</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            foreach ($files as $file) : ?>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="icon-small mr-2">
-                                                                <img width="38" src="../assets/images/icon/<?= $file['is_directory'] ? 'folder.png' : $this->getFileIcon($file['name']) ?>" alt="File">
-                                                            </div>
-                                                            <div>
-                                                                <?php if ($file['is_directory']) : ?>
-                                                                    <a href="<?= BASE_URL ?>/index.php?route=files&parent_id=<?= $file['id'] ?>" class="folder"><?= htmlspecialchars($file['name']) ?></a>
-                                                                <?php else : ?>
-                                                                    
-                                                                    <a type="button" data-title="<?= htmlspecialchars($file['name']) ?>" data-load-file="file"  data-load-target="#resolte-contaniner" data-url="<?= $this->openfile($file['name'], $file['id'] ) ?>" data-toggle="modal" data-target="#exampleModal"><?= htmlspecialchars($file['name'])  ?></a>
-                                                                <?php endif; ?>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><?= $file['is_directory'] ? 'Dossier' : pathinfo($file['name'], PATHINFO_EXTENSION) ?></td>
-                                                    <td><?= $file['is_directory'] ? '-' : $this->formatSize($file['size']) ?></td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <span class="dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown">
-                                                                <i class="ri-more-fill"></i>
-                                                            </span>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton10">
-                                                                <?php if ($file['is_directory']) : ?>
-                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=files&parent_id=<?= $file['id'] ?>"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
-                                                                <?php else : ?>
-                                                                    <!-- a faire ouvrir tout sorte de fichier et telecharger -->
-                                                                    <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>Ouvrir</a>
-                                                                    <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=download&id=<?= $file['id'] ?>"><i class="ri-download-fill mr-2"></i>Télécharger</a>
-
-                                                                <?php endif; ?>
-                                                                <a class="dropdown-item" data-toggle="modal" data-target="#addUser" href="#" onclick="editFile(<?= $file['id'] ?>, <?= $file['is_directory'] ? 'true' : 'false' ?>, '<?= htmlspecialchars($file['name'], ENT_QUOTES) ?>')"><i class="ri-pencil-fill mr-2"></i>Modifier</a>
-                                                                <a class="dropdown-item" href="<?= BASE_URL ?>/index.php?route=delete&id=<?= $file['id'] ?>"><i class="ri-delete-bin-6-fill mr-2"></i>Supprimer</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                        <!-- nouveau dossiers -->
-                                        <tbody id="nf"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- FIN Tableau file storage -->
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <form action="<?= BASE_URL ?>/index.php?route=files" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Modifier le nom d'un fichier</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="instaurl">Nom du fichier / dossier :</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="editFileName" name="editFileName" placeholder="">
-                                <input type="hidden" name="editFileid" id="editFileId">
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="editFileExtension"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Modifier</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header justify-content-between">
-                    <h4 class="modal-title"></h4>
-                    <div>
-                        <a type="button" class="btn" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div id="resolte-contaniner" style="height: 500px; overflow: auto;">
-                        File not found
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Popup uploads files -->
-    <div>
-        <!-- Bouton open popup -->
-        <button id="toggle-btn">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-
-        <!-- drag and drop add files -->
-        <div id="popup" class="p-4">
-            <h4 class="mb-4">Déposez vos fichiers</h4>
-            <form id="upload-form" action="<?= BASE_URL ?>/index.php?route=upload" method="post" enctype="multipart/form-data">
-                <div id="dropzone" class="mb-2">
-                    <i class="fas fa-cloud-upload-alt mb-3" style="font-size: 48px;"></i><br>
-                    Glissez et déposez vos fichiers ou cliquez
-                </div>
-                <div id="file-list" class="mb-3"></div>
-                <input type="hidden" name="parent_id" value="<?php echo $parentId; ?>">
-                <button id="validate-btn" class="btn btn-primary" disabled>Valider les fichiers</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- footer copyright -->
+    <!-- Footer -->
     <footer class="iq-footer">
         <div class="container-fluid">
             <div class="row">
@@ -424,38 +338,23 @@
             </div>
         </div>
     </footer>
-    <script>
-        function editFile(fileId, isDirectory, fileName) {
-            // Prevent the default link behavior
-            event.preventDefault();
-            // Split the fileName into name and extension
-            let fileNameParts = fileName.split('.');
-            let fileNameWithoutExtension = fileNameParts[0];
-            let fileExtension = fileNameParts.length > 1 ? '.' + fileNameParts[fileNameParts.length - 1] : '';
-            // Populate the form
-            document.getElementById('editFileId').value = fileId;
-            document.getElementById('editFileName').placeholder = fileNameWithoutExtension;
-            document.getElementById('editFileExtension').textContent = fileExtension;
-            setTimeout(function() {
-                document.getElementById('editFileName').select();
-            }, 600);
-            // Open the modal
-            $('#addUser').modal('show');
-        }
-    </script>
+
+    <!-- -------------------------Script------------------------- -->
     <!-- Backend Bundle JavaScript -->
     <script src="../assets/js/backend-bundle.min.js"></script>
 
     <!-- Chart Custom JavaScript -->
     <script src="../assets/js/customizer.js"></script>
+
+    <!-- Chart Custom JavaScript -->
     <script src="../assets/js/chart-custom.js"></script>
 
-    <!--ouvrir PDF-->
+    <!--PDF-->
     <script src="../assets/vendor/doc-viewer/include/pdf/pdf.js"></script>
-    <!--ouvrir Docs-->
+    <!--Docs-->
     <script src="../assets/vendor/doc-viewer/include/docx/jszip-utils.js"></script>
     <script src="../assets/vendor/doc-viewer/include/docx/mammoth.browser.min.js"></script>
-    <!--ouvrir PPTX-->
+    <!--PPTX-->
     <script src="../assets/vendor/doc-viewer/include/PPTXjs/js/filereader.js"></script>
     <script src="../assets/vendor/doc-viewer/include/PPTXjs/js/d3.min.js"></script>
     <script src="../assets/vendor/doc-viewer/include/PPTXjs/js/nv.d3.min.js"></script>
@@ -466,12 +365,31 @@
     <script src="../assets/vendor/doc-viewer/include/SheetJS/xlsx.full.min.js"></script>
     <!--Image viewer-->
     <script src="../assets/vendor/doc-viewer/include/verySimpleImageViewer/js/jquery.verySimpleImageViewer.js"></script>
-    <!--ouvrir officeToHtml-->
+    <!--officeToHtml-->
     <script src="../assets/vendor/doc-viewer/include/officeToHtml/officeToHtml.js"></script>
     <script src="../assets/js/doc-viewer.js"></script>
     <!-- app JavaScript -->
     <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/file.js"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Title</h4>
+                    <div>
+                        <a class="btn" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="resolte-contaniner" style="height: 500px;" class="overflow-auto">
+                        File not found
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

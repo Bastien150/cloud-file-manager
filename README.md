@@ -1,14 +1,14 @@
 ﻿# cloud-file-manager
-upload files dans le dossiers user
 ------------------
 Cloud
-
-ouvrir fichier (pdf, png, txt, pptx, xls, docx, jpeg)
-
 _
 trie :
 ordre alpha ; type fichiers ; taille
-parent id a finir
+------------------
+Profile page
+_
+edit name and email
+Notification email
 ------------------
 Projets 
 

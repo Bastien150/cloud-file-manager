@@ -47,7 +47,7 @@ Index Of Script
 ------------------------------------------------
 Index Of Script
 ----------------------------------------------*/
-
+document.body.style.overflow = 'auto';
 (function(jQuery) {
 
 

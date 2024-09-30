@@ -8,7 +8,7 @@ $authController = new AuthController();
 $fileController = new FileController();
 
 $route = $_GET['route'] ?? 'home';
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
     $_SESSION['info_user'] = $authController->getinfoUser($_SESSION['user_id']);
 }
 switch ($route) {
@@ -19,7 +19,7 @@ switch ($route) {
             header('Location: ' . BASE_URL . '/index.php?route=login');
         }
         exit;
-    case 'dash' :
+    case 'dash':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $brightness = max(0, min(255, intval($_POST['brightness'])));
             $power = $_POST['power'];
@@ -39,10 +39,11 @@ switch ($route) {
                 $red = $green = $blue = 0;
             }
             updateFiles($brightness, $red, $green, $blue);
-            }
+        }
         require_once __DIR__ . '/../app/views/index.php';
         exit;
     case 'login':
+        $usernames = $authController->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
@@ -107,14 +108,14 @@ switch ($route) {
     case 'project':
         $fileController->gotoproject();
         break;
-    
+
     case 'admin':
         $userselect = $_GET['userselect'] ?? null;
         $parentId = $_GET['parent_id'] ?? null;
         $users = $authController->getAllUser();
-        if ($userselect != null){
+        if ($userselect != null) {
             $infoUser = $authController->getinfoUser($userselect);
-        }else {
+        } else {
             $infoUser = "";
         }
         $fileController->adminfiles($parentId, $userselect, $users, $infoUser);
@@ -124,6 +125,17 @@ switch ($route) {
     case 'addUserAdmin':
         /* a faire */
         break;
+    case 'UpdatePassword':
+        $newpass = $_POST['npass'];
+        $lastpassword = $_POST['cpass'];
+        $authController->updatePassword($newpass, $lastpassword, $_SESSION['username']);
+        break;
+    case 'editusers':
+        
+        $authController->editUserPage();
+        break;
+
+
     default:
 
         header('Location: ' . BASE_URL . '/index.php?route=login');

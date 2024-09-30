@@ -287,7 +287,9 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script> ©
-                    </span> <a href="" class="">Glubul</a>
+                    </span> <a href="<?= BASE_URL ?>/index.php?route=admin" class="">
+                                Glubul
+                            </a>
                 </div>
             </div>
         </div>

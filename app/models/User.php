@@ -34,4 +34,17 @@ class User {
         $result = $this->db->query($sql);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUsernames() {
+        $sql = "SELECT username from users";
+        $result = $this->db->query($sql);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updatePassword($password){
+        $id = $_SESSION['user_id'];
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+        $this->db->query($sql, [$hashedPassword, $id]);
+    }
 }

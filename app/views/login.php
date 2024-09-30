@@ -57,10 +57,11 @@
                                         <div class="floating-label form-group">
                                             <input class="floating-input form-control" name="username" list="users" placeholder=" ">
                                             <label>Qui-est ce ?</label>
+                                            
                                             <datalist id="users">
-                                                <option value="Léa"></option>
-                                                <option value="Bastien"></option>
-                                                <option value="Visiteur"></option>
+                                            <?php foreach ($usernames as $username) {?>
+                                                <option value="<?= $username['username']?>"></option>
+                                                <?php }?>
                                             </datalist>
 
                                         </div>
