@@ -116,4 +116,28 @@ class File {
         $sql = "UPDATE files SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         $this->db->query($sql, [$newname, $id]);
     }
+    public function scanDirectory() {
+        $results = [];
+        $directory = "..\projects";
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directory),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
+    
+        foreach ($files as $file) {
+            if ($file->isFile()) {
+                $filename = strtolower($file->getFilename());
+                if ($filename === 'index.php' || $filename === 'index.html') {
+                    $results[] = $file->getPathname();
+                }
+            }
+        }
+    
+        return $results;
+    }
+
+    public function updateProject($id,$projName, $projDesc, $projLang, $projImg, $projDate, $projPath){
+        $sql = "UPDATE projects SET title= ?, spe_title= ?, content= ?, project_date= ?, icon= ?, path= ? WHERE id = ?";
+        $this->db->query($sql, [$projName, $projDesc, $projLang, $projDate, $projImg, $projPath, $id]);
+    }
 }

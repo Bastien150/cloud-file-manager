@@ -186,6 +186,7 @@ class FileController {
         if ($infoUserSelect && $infoUserSelect != ""){
             $infoUserSelect = $infoUserSelect[0];
         }
+        $projectPathList = $this->fileModel->scanDirectory();
         $projects = $this->fileModel->getProject();
         $userId = $_SESSION['user_id'];
         $currentPath = $parentId ? $this->fileModel->getPath($parentId) : [];
@@ -257,5 +258,9 @@ class FileController {
         }
         
         return null;
+    }
+
+    public function updateProject($id,$projName, $projDesc, $projLang, $projImg, $projDate, $projPath){
+        $this->fileModel->updateProject($id,$projName, $projDesc, $projLang, $projImg, $projDate, $projPath);
     }
 }

@@ -1,0 +1,14 @@
+*{
+    align-items: center;
+}
+.input-metre{
+    margin: 0 !important;
+    height: 45px !important;
+
+}
+
+.input-centimetre{
+    margin: 0 !important;
+    height: 45px !important;
+
+}

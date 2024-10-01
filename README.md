@@ -21,7 +21,6 @@ _
 
 accès aux dossiers de tt les users
 
-crée user
 modifier user modal
 export pdf
 recherche user

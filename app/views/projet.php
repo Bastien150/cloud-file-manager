@@ -212,7 +212,7 @@
                                                                 echo substr($infouser['username'], 0, 1);
                                                             } ?></div>
                                                         <div class="profile-detail mt-3">
-                                                            <h5><a href="../app/user-profile-edit.html"><?php if (isset($_SESSION['info_user'])) {
+                                                            <h5><a href="<?= BASE_URL ?>/index.php?route=editusers"><?php if (isset($_SESSION['info_user'])) {
                                                                                                             $infouser = $_SESSION['info_user'][0];
                                                                                                             echo $infouser['username'];
                                                                                                         } ?></a></h5>
@@ -263,7 +263,7 @@
                                                     <div class="card-body d-flex flex-column">
                                                         <h5 class="card-title"><?= htmlspecialchars($project['spe_title']) ?></h5>
                                                         <p class="card-text flex-grow-1"><?= htmlspecialchars($project['content']) ?></p>
-                                                        <a href="#" class="btn btn-primary mt-auto">Voir le projet</a>
+                                                        <a href="../projects/<?= htmlspecialchars($project['path']) ?>" class="btn btn-primary mt-auto">Voir le projet</a>
                                                     </div>
                                                     <div class="card-footer text-muted"><?= htmlspecialchars($project['project_date']) ?></div>
                                                 </div>

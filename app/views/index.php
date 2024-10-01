@@ -326,7 +326,7 @@
                                                                 echo substr($infouser['username'], 0, 1);
                                                             } ?></div>
                                                         <div class="profile-detail mt-3">
-                                                            <h5><a href="../app/user-profile-edit.html"><?php if (isset($_SESSION['info_user'])) {
+                                                            <h5><a href="<?= BASE_URL ?>/index.php?route=editusers"><?php if (isset($_SESSION['info_user'])) {
                                                                                                             $infouser = $_SESSION['info_user'][0];
                                                                                                             echo $infouser['username'];
                                                                                                         } ?></a></h5>
@@ -588,6 +588,7 @@
             </div>
         </div>
     </footer>
+    
     <!-- Backend Bundle JavaScript -->
     <script src="../assets/js/backend-bundle.min.js"></script>
 

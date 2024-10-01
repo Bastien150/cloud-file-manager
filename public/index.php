@@ -140,8 +140,19 @@ switch ($route) {
         $authController->updatePassword($newpass, $lastpassword, $_SESSION['username']);
 
         break;
-    case 'editusers':
 
+    case 'editproject':
+        $id= $_POST['Projid'];
+        $projName = $_POST['ProjNom'];
+        $projDesc = $_POST['ProjDesc'];
+        $projLang = $_POST['ProjLang'];
+        $projImg = $_POST['ProjImg'];
+        $projDate = $_POST['ProjDate'];
+        $projPath = $_POST['ProjChemin'];
+        $fileController->updateProject($id,$projName, $projDesc, $projLang, $projImg, $projDate, $projPath);
+        header('Location: ' . BASE_URL . '/index.php?route=admin');
+        break;
+    case 'editusers':
         $authController->editUserPage();
         break;
 

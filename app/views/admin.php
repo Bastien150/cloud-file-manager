@@ -205,10 +205,10 @@
                                                                 echo substr($infouser['username'], 0, 1);
                                                             } ?></div>
                                                         <div class="profile-detail mt-3">
-                                                            <h5><a href="../app/user-profile-edit.html"><?php if (isset($_SESSION['info_user'])) {
-                                                                                                            $infouser = $_SESSION['info_user'][0];
-                                                                                                            echo $infouser['username'];
-                                                                                                        } ?></a></h5>
+                                                            <h5><a href="<?= BASE_URL ?>/index.php?route=editusers"><?php if (isset($_SESSION['info_user'])) {
+                                                                                                                        $infouser = $_SESSION['info_user'][0];
+                                                                                                                        echo $infouser['username'];
+                                                                                                                    } ?></a></h5>
                                                             <p><?php if (isset($infouser['email'])) {
                                                                     echo $infouser['email'];
                                                                 } ?></p>
@@ -281,7 +281,7 @@
                                                                                 echo $dateCreated; ?></td>
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
-                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer" href="<?= BASE_URL ?>/index.php?route=delUserAdmin&uid=<?= $user['id']?>"><i class="ri-delete-bin-line"></i></a>
+                                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer" href="<?= BASE_URL ?>/index.php?route=delUserAdmin&uid=<?= $user['id'] ?>"><i class="ri-delete-bin-line"></i></a>
                                                             <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Réinitialiser le mdp" href="#"><i class="fa-solid fa-arrows-rotate"></i></a>
                                                         </div>
                                                     </td>
@@ -529,39 +529,47 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <!-- Form a faire pour update le form  gestion d'erreur ...-->
-                    <form action="">
+                <form method="POST" action="<?= BASE_URL ?>/index.php?route=editproject">
+                    <div class="modal-body">
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Nom :</label>
-                            <input type="text" class="form-control" id="ProjNom" placeholder="Ex : John">
+                            <input type="text" class="form-control" id="ProjNom" name="ProjNom" placeholder="Ex : John">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Description :</label>
-                            <input type="text" class="form-control" id="ProjDesc" placeholder="Ex : Calculatrice égyptienne">
+                            <input type="text" class="form-control" id="ProjDesc" name="ProjDesc" placeholder="Ex : Calculatrice égyptienne">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Langage :</label>
-                            <input type="text" class="form-control" id="ProjLang" placeholder="Ex : Java">
+                            <input type="text" class="form-control" id="ProjLang" name="ProjLang" placeholder="Ex : Java">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">icon :</label>
-                            <input type="text" class="form-control" id="ProjImg" placeholder="Ex : fas fa-....">
+                            <input type="text" class="form-control" id="ProjImg"  name="ProjImg" placeholder="Ex : fas fa-....">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Date :</label>
-                            <input type="text" class="form-control" id="ProjDate" placeholder="Ex : Fait le mm/aaaa">
+                            <input type="text" class="form-control" id="ProjDate" name="ProjDate" placeholder="Ex : Fait le mm/aaaa">
                         </div>
                         <div class="form-group mt-1 mb-1">
                             <label for="instaurl">Chemin :</label>
-                            <input type="text" class="form-control" id="ProjChemin" placeholder="Ex : ./">
+                            <input class="form-control" id="ProjChemin" name="ProjChemin" placeholder="Ex : ./" list="ProjectsPath">
+                            <input hidden id="Projid" name="Projid">
+                            
+
+                            <datalist id="ProjectsPath">
+                                <?php foreach ($projectPathList as $path) { ?>
+                                    <option value="<?= substr($path, 12) ?>"></option>
+                                <?php } ?>
+                            </datalist>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer mt-0">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary">Ajouter</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer mt-0">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -650,6 +658,7 @@
                     document.getElementById('ProjImg').value = inputProject['icon']
                     document.getElementById('ProjDate').value = inputProject['project_date']
                     document.getElementById('ProjChemin').value = inputProject['path']
+                    document.getElementById('Projid').value = inputProject['id']
                 } else if (target.querySelector('.ri-delete-bin-line')) {
                     console.log('Supprimer le projet avec l\'ID:', projectId);
                 }
