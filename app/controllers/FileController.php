@@ -50,7 +50,9 @@ class FileController {
                 $parentPath = $this->getParentPath($parentId);
                 $directoryPath = $userDir . $parentPath . $directoryName;
                 if (!file_exists($directoryPath)) {
-                    mkdir($directoryPath, 0777, true);
+                    if(!mkdir($directoryPath, 0777, true)){
+                        error_log("Erreur de création Dossier : " . $directoryPath, 3, "./error.txt");
+                    }
                 }
                 $this->fileModel->create($userId, $directoryName, $parentPath . $directoryName . '/', 'directory', 0, $parentId, true);
             }
@@ -75,14 +77,19 @@ class FileController {
             $parentPath = $this->getParentPath($parentId);
             $uploadDir = $userDir . $parentPath;
             if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
+                if(!mkdir($uploadDir, 0777, true)){
+                    error_log("Erreur lors de la création du dossier : " . $uploadDir, 3,"./error.txt");
+                }
             }
 
             $fileName = $file['name'];
             $filePath = $uploadDir . $fileName;
+            $path = $parentPath . $fileName;
 
             if (move_uploaded_file($file['tmp_name'], $filePath)) {
-                $this->fileModel->create($userId, $fileName, $parentPath . $fileName, $file['type'], $file['size'], $parentId);
+                $this->fileModel->create($userId, $fileName, $path , $file['type'], $file['size'], $parentId);
+            }else {
+                error_log("Erreur lors de l'ajout du fichier : " . $uploadDir, 3,"./error.txt");
             }
 
             header('Location: ' . BASE_URL . '/index.php?route=files' . ($parentId ? '&parent_id=' . $parentId : ''));
@@ -173,7 +180,9 @@ class FileController {
     private function getUserDir($userId) {
         $userDir = UPLOAD_DIR . 'user_' . $userId . '/';
         if (!file_exists($userDir)) {
-            mkdir($userDir, 0777, true);
+            if(!mkdir($userDir, 0777, true)){
+                error_log("Erreur lors de la création du dossier : " . $userDir, 3,"./error.txt");
+            }
         }
         return $userDir;
     }
@@ -249,7 +258,7 @@ class FileController {
     
     public function openfile($fileName, $id) {
         $path = $this->fileModel->getById($id);
-        $allowedExtensions = ['pdf', 'pptx', 'ppt', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'gif', 'doc', 'docx'];
+        $allowedExtensions = ['pdf', 'pptx', 'ppt', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'gif', 'doc', 'docx', "csv"];
         
         $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
         

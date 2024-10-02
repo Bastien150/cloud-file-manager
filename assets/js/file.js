@@ -130,7 +130,6 @@ function uploadFiles() {
         if (files.length > 0) {
             uploadFiles(); // Upload le fichier suivant s'il y en a
         } else {
-            alert('Tous les fichiers ont été uploadés avec succès !');
             location.reload();
         }
     }).catch(error => {

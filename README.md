@@ -10,25 +10,17 @@ _
 edit name and email
 Notification email
 ------------------
-Projets 
-
-accédé au projets avec le boutons
-_
-------------------
 admin page
 _
 <Erreur parentid a faire> 
 
-accès aux dossiers de tt les users
+accès aux dossiers de tt les users sans bug
 
 modifier user modal
 export pdf
 recherche user
 
-
 crée projets (icon nom desc date + upload) 
-modifier projets (icon, nom, desc, date, chemin) modal
-en js l'id est recup je veux remplir les inputs
 recherche projet
 
 (faire un bouton quand on est admin sur le profile en Haut a droite
@@ -42,3 +34,6 @@ ajout avatar
 ------------------
 partage fichiers entre user (accès téléchargement visualisation)
 lors de la suppréssion supprimer le vrais fichier/dossier
+-
+chaise 42 55
+-

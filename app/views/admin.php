@@ -85,12 +85,12 @@
                 </nav>
                 <div class="sidebar-bottom">
                     <h4 class="mb-3"><i class="las la-cloud mr-2"></i>Stockage</h4>
-                    <p>17.1 / 20 GB Utilisé</p>
+                    <p><?= round(disk_free_space(".")/1073741824,2)?> / <?= round(disk_total_space(".")/1073741824,2)?> GB Utilisé</p>
                     <div class="iq-progress-bar mb-3">
-                        <span class="bg-primary iq-progress progress-1" data-percent="67">
+                        <span class="bg-primary iq-progress progress-1" data-percent="<?= percentsize()?>">
                         </span>
                     </div>
-                    <p>75% plein - 3.9 GB Dispo</p>
+                    <p><?= percentsize()?>% plein - <?= freesize(); ?> libre</p>
                 </div>
                 <div class="p-3"></div>
             </div>
@@ -344,8 +344,9 @@
                                             <?php foreach ($projects as $project) { ?>
                                                 <tr class="rowProject">
                                                     <td class="projectname-info" name="<?php echo $project['id']; ?>"><?php echo $project['title']; ?></td>
-                                                    <td class="projectdate-info"><?php echo $project['project_date']; ?></td>
+                                                    <td class="projectdate-info"><?php echo $project['project_date']; ?>
                                                     <input type="text" id="projectidinput<?php echo $project['id']; ?>" value='<?php echo json_encode($project); ?>' hidden>
+                                                </td>
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
                                                             <a style="color: #8f93f6;" class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Modifier"><i data-toggle="modal" data-target="#EditProject" class="ri-pencil-line"></i></a>

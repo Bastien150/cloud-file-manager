@@ -43,15 +43,17 @@ switch ($route) {
         require_once __DIR__ . '/../app/views/index.php';
         exit;
     case 'login':
+        $authController->getVisitor();       
+        
         $usernames = $authController->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
             if ($authController->login($username, $password)) {
-                header('Location: ' . BASE_URL . '/index.php?route=files');
+                header('Location: ' . BASE_URL . '/index.php?route=dash');
                 exit;
             } else {
-                $error = "Invalid email or password.";
+                $error = "Mauvais utilisateur ou mot de passe";
             }
         }
         require_once __DIR__ . '/../app/views/login.php';
@@ -165,4 +167,32 @@ switch ($route) {
         header("HTTP/1.0 404 Not Found");
         require_once __DIR__ . '/../app/views/404.php';
         break; */
+}
+function percentsize()
+{
+    $chemin = "/"; // Ou "C:/" sur Windows
+    $total = disk_total_space($chemin);
+    $libre = disk_free_space($chemin);
+    $utilise = $total - $libre;
+    $pourcentage_utilise = ($utilise / $total) * 100;
+
+    // Fonction pour formater les octets en unités lisibles
+    return round($pourcentage_utilise, 2);
+}
+
+function freesize()
+{
+    $libre = disk_free_space("./");
+
+    function formatBytes($bytes, $precision = 1)
+    {
+        $units = array('o', 'Ko', 'Mo', 'Go', 'To');
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        $bytes /= pow(1024, $pow);
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+
+    return formatBytes($libre);
 }

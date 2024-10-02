@@ -44,8 +44,8 @@
       /* exported handleSignoutClick */
 
       // TODO(développeur) : Définir l'ID client et la clé API depuis la console de développement
-      const CLIENT_ID = '59687325787-biq98uhgrmgvb512nk1jsfjcjqs7nem6.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyC93oZKdngAeuyVoWR8jiuEKdJYaHEopQg';
+      /* const CLIENT_ID = '59687325787-biq98uhgrmgvb512nk1jsfjcjqs7nem6.apps.googleusercontent.com';
+      const API_KEY = 'AIzaSyC93oZKdngAeuyVoWR8jiuEKdJYaHEopQg'; */
 
       // URL du document de découverte pour les API utilisées par le quickstart
       const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';

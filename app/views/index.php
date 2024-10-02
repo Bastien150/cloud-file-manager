@@ -206,12 +206,12 @@
                 </nav>
                 <div class="sidebar-bottom">
                     <h4 class="mb-3"><i class="las la-cloud mr-2"></i>Stockage</h4>
-                    <p>17.1 / 20 GB Utilisé</p>
+                    <p><?= round(disk_free_space(".")/1073741824,2)?> / <?= round(disk_total_space(".")/1073741824,2)?> GB Utilisé</p>
                     <div class="iq-progress-bar mb-3">
-                        <span class="bg-primary iq-progress progress-1" data-percent="67">
+                        <span class="bg-primary iq-progress progress-1" data-percent="<?= percentsize()?>">
                         </span>
                     </div>
-                    <p>75% plein - 3.9 GB Dispo</p>
+                    <p><?= percentsize()?>% plein - <?= freesize(); ?> libre</p>
                 </div>
                 <div class="p-3"></div>
             </div>
@@ -362,7 +362,7 @@
                                                                         echo $infouser['username'];
                                                                     } ?></h3>
                                         <p class="mb-5">Vous etes le plus beau des humains en ce jour ensoleillé</p>
-                                        <a href="#">Accès au cloud<i class="las la-arrow-right ml-2"></i></a>
+                                        <a href="<?= BASE_URL ?>/index.php?route=files">Accès au cloud<i class="las la-arrow-right ml-2"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -400,7 +400,7 @@
                                             </div>
                                             <div class="media-body ml-3">
                                                 <p class="mb-0">Espace restant</p>
-                                                <h5>3.9BG</h5>
+                                                <h5><?= round(disk_total_space(".")/1073741824,2) - round(disk_free_space(".")/1073741824,1)?> Go</h5>
                                             </div>
                                         </div>
                                     </div>

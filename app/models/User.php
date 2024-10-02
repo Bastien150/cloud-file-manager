@@ -56,4 +56,13 @@ class User {
         $sql = "DELETE FROM users WHERE id = ?";
         $this->db->query($sql, [$id]);
     }
+
+    public function verifyVisitor($ip){
+        $sql = "SELECT COUNT(*) AS res FROM visitor WHERE ip = ?";
+        $res = $this->db->query($sql, [$ip]);
+        if ($res->fetch(PDO::FETCH_ASSOC)['res'] == 0) {
+            $sql = "INSERT INTO visitor (ip) VALUES (?)";
+            $res = $this->db->query($sql, [$ip]);
+        }
+    }
 }

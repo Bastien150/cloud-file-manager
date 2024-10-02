@@ -85,12 +85,12 @@
                 </nav>
                 <div class="sidebar-bottom">
                     <h4 class="mb-3"><i class="las la-cloud mr-2"></i>Stockage</h4>
-                    <p>17.1 / 20 GB Utilisé</p>
+                    <p><?= round(disk_free_space(".")/1073741824,2)?> / <?= round(disk_total_space(".")/1073741824,2)?> GB Utilisé</p>
                     <div class="iq-progress-bar mb-3">
-                        <span class="bg-primary iq-progress progress-1" data-percent="67">
+                        <span class="bg-primary iq-progress progress-1" data-percent="<?= percentsize()?>">
                         </span>
                     </div>
-                    <p>75% plein - 3.9 GB Dispo</p>
+                    <p><?= percentsize()?>% plein - <?= freesize(); ?> libre</p>
                 </div>
                 <div class="p-3"></div>
             </div>
@@ -184,7 +184,9 @@
                                 <!-- Profile icon + info -->
                                 <li class="nav-item nav-icon dropdown caption-content">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <div class="caption bg-primary line-height"><?php if (isset($_SESSION['info_user'])) {
+                                        <div class="caption bg-primary line-height"><?php 
+                                        
+                                        if (isset($_SESSION['info_user'])) {
                                                                                         $infouser = $_SESSION['info_user'][0];
                                                                                         echo substr($infouser['username'], 0, 1);
                                                                                     } ?></div>

@@ -1,0 +1,1 @@
+Erreur de requête : SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email'Erreur de requête : SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key 'users.email'Erreur de requête : SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'parent_id' at row 1

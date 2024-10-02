@@ -17,9 +17,13 @@ class Database {
     }
 
     public function query($sql, $params = []) {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch (\PDOException $e) {
+            error_log("Erreur de requête : " . $e->getMessage(), 3, "./error.txt");
+        }
     }
 
     public function lastInsertId() {
