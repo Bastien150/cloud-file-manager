@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tables avec recherche et pagination</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .searchInput {
+        margin-bottom: 10px;
+        padding: 5px;
+        width: 200px;
+      }
+      .pagination {
+        margin-top: 10px;
+      }
+      .pageButton {
+        margin-right: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Tableau 1: Ventes</h2>
+    <input
+      type="text"
+      id="searchInput1"
+      class="searchInput"
+      placeholder="Rechercher..."
+    />
+
+    <!-- Table 1 -->
+    <table id="dataTable1">
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Prix Unitaire</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ordinateur</td>
+          <td>50</td>
+          <td>800</td>
+          <td>40000</td>
+        </tr>
+        <tr>
+          <td>Smartphone</td>
+          <td>100</td>
+          <td>500</td>
+          <td>50000</td>
+        </tr>
+        <tr>
+          <td>Tablette</td>
+          <td>30</td>
+          <td>300</td>
+          <td>9000</td>
+        </tr>
+        <tr>
+          <td>Écran</td>
+          <td>80</td>
+          <td>200</td>
+          <td>16000</td>
+        </tr>
+        <tr>
+          <td>Clavier</td>
+          <td>120</td>
+          <td>50</td>
+          <td>6000</td>
+        </tr>
+        <tr>
+          <td>Souris</td>
+          <td>150</td>
+          <td>30</td>
+          <td>4500</td>
+        </tr>
+        <tr>
+          <td>Imprimante</td>
+          <td>25</td>
+          <td>150</td>
+          <td>3750</td>
+        </tr>
+        <tr>
+          <td>Disque dur</td>
+          <td>60</td>
+          <td>100</td>
+          <td>6000</td>
+        </tr>
+        <tr>
+          <td>Webcam</td>
+          <td>40</td>
+          <td>70</td>
+          <td>2800</td>
+        </tr>
+        <tr>
+          <td>Enceintes</td>
+          <td>35</td>
+          <td>80</td>
+          <td>2800</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="pagination1" class="pagination"></div>
+
+    <h2>Tableau 2: Employés</h2>
+    <input
+      type="text"
+      id="searchInput2"
+      class="searchInput"
+      placeholder="Rechercher..."
+    />
+
+    <!-- Table 2 -->
+    <table id="dataTable2">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Poste</th>
+          <th>Département</th>
+          <th>Ancienneté</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alice Dupont</td>
+          <td>Développeur</td>
+          <td>IT</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Bob Martin</td>
+          <td>Designer</td>
+          <td>Marketing</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Charlie Brown</td>
+          <td>Manager</td>
+          <td>Ventes</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>Diana Prince</td>
+          <td>Analyste</td>
+          <td>Finance</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Ethan Hunt</td>
+          <td>Développeur</td>
+          <td>IT</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Fiona Green</td>
+          <td>RH</td>
+          <td>Ressources Humaines</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>George White</td>
+          <td>Comptable</td>
+          <td>Finance</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Hannah Black</td>
+          <td>Chef de projet</td>
+          <td>IT</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Ian Foster</td>
+          <td>Commercial</td>
+          <td>Ventes</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Julia Chen</td>
+          <td>Designer</td>
+          <td>Marketing</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Alice Dupont</td>
+          <td>Développeur</td>
+          <td>IT</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Bob Martin</td>
+          <td>Designer</td>
+          <td>Marketing</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Charlie Brown</td>
+          <td>Manager</td>
+          <td>Ventes</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>Diana Prince</td>
+          <td>Analyste</td>
+          <td>Finance</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Ethan Hunt</td>
+          <td>Développeur</td>
+          <td>IT</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Fiona Green</td>
+          <td>RH</td>
+          <td>Ressources Humaines</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>George White</td>
+          <td>Comptable</td>
+          <td>Finance</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Hannah Black</td>
+          <td>Chef de projet</td>
+          <td>IT</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Ian Foster</td>
+          <td>Commercial</td>
+          <td>Ventes</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Julia Chen</td>
+          <td>Designer</td>
+          <td>Marketing</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Alice Dupont</td>
+          <td>Développeur</td>
+          <td>IT</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Bob Martin</td>
+          <td>Designer</td>
+          <td>Marketing</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Charlie Brown</td>
+          <td>Manager</td>
+          <td>Ventes</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>Diana Prince</td>
+          <td>Analyste</td>
+          <td>Finance</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>Ethan Hunt</td>
+          <td>Développeur</td>
+          <td>IT</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Fiona Green</td>
+          <td>RH</td>
+          <td>Ressources Humaines</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>George White</td>
+          <td>Comptable</td>
+          <td>Finance</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Hannah Black</td>
+          <td>Chef de projet</td>
+          <td>IT</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>Ian Foster</td>
+          <td>Commercial</td>
+          <td>Ventes</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Julia Chen</td>
+          <td>Designer</td>
+          <td>Marketing</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="pagination2" class="pagination"></div>
+
+    <script>
+      const itemsPerPage = 5;
+      const tables = [
+        { id: "dataTable1", currentPage: 1, filteredRows: [] },
+        { id: "dataTable2", currentPage: 1, filteredRows: [] },
+      ];
+
+      function displayTable(tableInfo) {
+        const table = document.getElementById(tableInfo.id);
+        const rows =
+          tableInfo.filteredRows.length > 0
+            ? tableInfo.filteredRows
+            : Array.from(table.querySelectorAll("tbody tr"));
+        const start = (tableInfo.currentPage - 1) * itemsPerPage;
+        rows.forEach(
+          (row, index) =>
+            (row.style.display =
+              index >= start && index < start + itemsPerPage ? "" : "none")
+        );
+        updatePaginationButtons(tableInfo);
+      }
+
+      function filterTable(tableInfo, searchTerm) {
+        const table = document.getElementById(tableInfo.id);
+        const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+        tableInfo.filteredRows = rows.filter((row) => {
+          const text = row.textContent.toLowerCase();
+          return text.includes(searchTerm.toLowerCase());
+        });
+
+        tableInfo.currentPage = 1;
+        setupPagination(tableInfo);
+        displayTable(tableInfo);
+      }
+
+      function setupPagination(tableInfo) {
+        const totalRows =
+          tableInfo.filteredRows.length ||
+          document.querySelectorAll(`#${tableInfo.id} tbody tr`).length;
+        const pageCount = Math.ceil(totalRows / itemsPerPage);
+        const paginationElement = document.getElementById(
+          `pagination${tableInfo.id.slice(-1)}`
+        );
+        paginationElement.innerHTML = Array.from(
+          { length: pageCount },
+          (_, i) =>
+            `<span class="pageButton" onclick="changePage(${i + 1}, '${
+              tableInfo.id
+            }')">${i + 1}</span>`
+        ).join("");
+      }
+
+      function changePage(page, tableId) {
+        const tableInfo = tables.find((t) => t.id === tableId);
+        tableInfo.currentPage = page;
+        displayTable(tableInfo);
+      }
+
+      function updatePaginationButtons(tableInfo) {
+        document
+          .querySelectorAll(`#pagination${tableInfo.id.slice(-1)} .pageButton`)
+          .forEach(
+            (button, index) =>
+              (button.style.fontWeight =
+                index + 1 === tableInfo.currentPage ? "bold" : "normal")
+          );
+      }
+
+      window.addEventListener("load", () =>
+        tables.forEach((tableInfo) => {
+          document
+            .getElementById(`searchInput${tableInfo.id.slice(-1)}`)
+            .addEventListener("input", (e) =>
+              filterTable(tableInfo, e.target.value)
+            );
+          setupPagination(tableInfo);
+          displayTable(tableInfo);
+        })
+      );
+    </script>
+  </body>
+</html>
