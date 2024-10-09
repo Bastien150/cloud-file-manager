@@ -43,7 +43,7 @@ switch ($route) {
         require_once __DIR__ . '/../app/views/index.php';
         exit;
     case 'login':
-        $authController->getVisitor();       
+        /* $authController->getVisitor();    */    
         
         $usernames = $authController->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -160,13 +160,7 @@ switch ($route) {
 
 
     default:
-
         header('Location: ' . BASE_URL . '/index.php?route=login');
-
-        /*     // Page 404
-        header("HTTP/1.0 404 Not Found");
-        require_once __DIR__ . '/../app/views/404.php';
-        break; */
 }
 function percentsize()
 {

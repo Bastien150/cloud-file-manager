@@ -1,0 +1,1 @@
+Erreur de requête : SQLSTATE[HY000]: General error: 1366 Incorrect integer value: '' for column 'is_directory' at row 1

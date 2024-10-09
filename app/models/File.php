@@ -11,21 +11,18 @@ class File
     }
 
     /* ajoute le fichier en bdd en vérifiant qu'il n'existe pas dedans */
-    public function create($userId, $name, $path, $mimeType, $size, $parentId = null, $isDirectory = false)
+    public function create($userId, $name, $path, $mimeType, $size, $parentId = 0, $isDirectory = 0)
     {
         // Vérifier si un fichier avec le même nom, la même taille et le même chemin existe déjà
-        $checkSql = "SELECT id FROM files WHERE user_id = ? AND name = ? AND path = ? AND size = ? AND parent_id " . ($parentId === null ? "IS NULL" : "= ?");
-        $params = [$userId, $name, $path, $size];
-        if ($parentId !== null) {
-            $params[] = $parentId;
-        }
-
+        $checkSql = "SELECT id FROM files WHERE user_id = ? AND name = ? AND path = ? AND size = ? AND parent_id = ?";
+        $params = [$userId, $name, $path, $size, $parentId];
+    
         $existingFile = $this->db->query($checkSql, $params)->fetch();
-
+    
         if ($existingFile) {
             return false;
         }
-
+    
         // Insérer le nouveau fichier
         $sql = "INSERT INTO files (user_id, name, path, mime_type, size, parent_id, is_directory) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -129,7 +126,7 @@ class File
     public function scanDirectory()
     {
         $results = [];
-        $directory = "..\projects";
+        $directory = "../projects";
         $files = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($directory),
             RecursiveIteratorIterator::SELF_FIRST

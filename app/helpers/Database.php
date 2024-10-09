@@ -12,7 +12,7 @@ class Database {
         try {
             $this->pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (\PDOException $e) {
-            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+            error_log($e->getMessage(). (int)$e->getCode(), 3, "./error.txt");
         }
     }
 
@@ -22,7 +22,7 @@ class Database {
             $stmt->execute($params);
             return $stmt;
         } catch (\PDOException $e) {
-            error_log("Erreur de requête : " . $e->getMessage(), 3, "./error.txt");
+            error_log("Erreur de requête : " . $e->getMessage(). "\n", 3, "./error.txt");
         }
     }
 

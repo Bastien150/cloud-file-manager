@@ -111,7 +111,6 @@
                         <i class="ri-menu-line wrapper-menu"></i>
                         <a href="index.html" class="header-logo">
                             <img src="../assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
-                            <img src="../assets/images/logo-white.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
                         </a>
                     </div>
 

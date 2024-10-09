@@ -54,7 +54,7 @@ class FileController {
                         error_log("Erreur de création Dossier : " . $directoryPath, 3, "./error.txt");
                     }
                 }
-                $this->fileModel->create($userId, $directoryName, $parentPath . $directoryName . '/', 'directory', 0, $parentId, true);
+                $this->fileModel->create($userId, $directoryName, $parentPath . $directoryName . '/', 'directory', 0, $parentId, 1);
             }
 
             header('Location: ' . BASE_URL . '/index.php?route=files' . ($parentId ? '&parent_id=' . $parentId : ''));
@@ -71,26 +71,32 @@ class FileController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
             $userId = $_SESSION['user_id'];
             $file = $_FILES['file'];
-            $parentId = $_POST['parent_id'] ?? null;
+            $parentId = $_POST['parent_id'] ?? 0;
 
             $userDir = $this->getUserDir($userId);
             $parentPath = $this->getParentPath($parentId);
+            $_SESSION['test'] = $parentPath;
             $uploadDir = $userDir . $parentPath;
-            if (!file_exists($uploadDir)) {
-                if(!mkdir($uploadDir, 0777, true)){
-                    error_log("Erreur lors de la création du dossier : " . $uploadDir, 3,"./error.txt");
-                }
-            }
 
             $fileName = $file['name'];
             $filePath = $uploadDir . $fileName;
             $path = $parentPath . $fileName;
 
-            if (move_uploaded_file($file['tmp_name'], $filePath)) {
-                $this->fileModel->create($userId, $fileName, $path , $file['type'], $file['size'], $parentId);
-            }else {
-                error_log("Erreur lors de l'ajout du fichier : " . $uploadDir, 3,"./error.txt");
+            try {
+                if (!file_exists($uploadDir)) {
+                    if(!mkdir($uploadDir, 0777, true)){
+                        error_log("Erreur lors de la création du dossier : " . $uploadDir." " .$fileName , 3,"./error.txt");
+                    }
+                }
+
+                move_uploaded_file($file['tmp_name'], $filePath);
+                
+
+                $this->fileModel->create($userId, $fileName, $path, $file['type'], $file['size'], $parentId, 0);
+            } catch (Exception $e) {
+                error_log("Erreur lors de l'ajout du fichier : " . $e->getMessage() ."\n", 3, "./error.log");
             }
+            
 
             header('Location: ' . BASE_URL . '/index.php?route=files' . ($parentId ? '&parent_id=' . $parentId : ''));
             exit;

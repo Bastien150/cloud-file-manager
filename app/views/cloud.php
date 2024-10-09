@@ -104,7 +104,6 @@
                         <i class="ri-menu-line wrapper-menu"></i>
                         <a href="index.html" class="header-logo">
                             <img src="../assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
-                            <img src="../assets/images/logo-white.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
                         </a>
                     </div>
 
@@ -237,7 +236,7 @@
                         <div class="card card-block card-stretch card-transparent">
                             <div class="card-header d-flex flex-column flex-md-row justify-content-between pb-0">
                                 <div class="header-title mb-5 mb-md-0 mt-3 mt-md-0"> <!-- Ajout de mt-3 pour les petits écrans -->
-                                    <h4 class="card-title">Vos documents</h4>
+                                    <h4 class="card-title">Vos documents <?php if(isset($_SESSION['test'])){ echo $_SESSION['test'] ; }?></h4>
                                 </div>
                                 <!-- chemin -->
                                 <span class="mt-2 mt-md-0">Chemin : <a href="<?= BASE_URL ?>/index.php?route=files">Accueil</a>
@@ -406,7 +405,7 @@
                     Glissez et déposez vos fichiers ou cliquez
                 </div>
                 <div id="file-list" class="mb-3"></div>
-                <input type="hidden" name="parent_id" value="<?php echo $parentId; ?>">
+                <input type="hidden" name="parent_id" value="<?php echo ($parentId === null || $parentId === '') ? '0' : $parentId; ?>">
                 <button id="validate-btn" class="btn btn-primary" disabled>Valider les fichiers</button>
             </form>
         </div>
