@@ -43,8 +43,7 @@ switch ($route) {
         require_once __DIR__ . '/../app/views/index.php';
         exit;
     case 'login':
-        /* $authController->getVisitor();    */    
-        
+        /* $authController->getVisitor();    */            
         $usernames = $authController->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';

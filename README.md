@@ -32,6 +32,10 @@ _
 modifier info (nom email mdp)
 ajout avatar
 ------------------
+
+faire une page Errror 404
+
+------------------
 partage fichiers entre user (accès téléchargement visualisation)
 lors de la suppréssion supprimer le vrais fichier/dossier
 -
